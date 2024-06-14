@@ -17,7 +17,7 @@ export default function Home() {
     <main className="flex">
       <div className="">
         <BannerCarousel />
-        <section className="px-8 space-y-12 py-8">
+        <section className="px-8 space-y-12 py-2">
           <CategoryList />
           <AdsCard />
         </section>

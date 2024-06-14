@@ -1,3 +1,4 @@
+import Header from "@/components/layout/header";
 import "./globals.css";
 
 import { Toaster, toast } from "sonner";
@@ -10,8 +11,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Toaster richColors />
+        <Header />
         {children}
+        <Toaster richColors />
       </body>
     </html>
   );

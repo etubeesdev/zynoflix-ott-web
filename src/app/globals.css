@@ -6,6 +6,7 @@
   --tw-bg-opacity: 1;
   background-color: rgb(4 1 28 / var(--tw-bg-opacity));
 }
+
 .video-overlay {
   background: linear-gradient(0deg, #00031c, #00031cb3 15.62%, #00031c00 31.32%),
     linear-gradient(90deg, #00031c 6.03%, #00031c00 78.64%);

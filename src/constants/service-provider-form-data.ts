@@ -49,6 +49,23 @@ export const formdata: any = [
     options: categories,
   },
   {
+    title: "Certificate",
+    description: "Select the content rating",
+    tag: "select-1",
+    required: false,
+    name: "certification",
+    options: [
+      { label: "U - Unrestricted", value: "U" },
+      {
+        label:
+          "UA - Unrestricted but with parental discretion advisory for children under 12 years",
+        value: "UA",
+      },
+      { label: "A - Adult", value: "A" },
+      { label: "S - Only for a special class of persons", value: "S" },
+    ],
+  },
+  {
     title: "Language",
     description: "Enter your language",
     tag: "select",

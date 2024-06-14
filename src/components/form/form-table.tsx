@@ -99,7 +99,6 @@ const CreateFormSubmit = ({ status, response }: any) => {
     ),
   });
 
-
   async function onSubmit(values: z.infer<typeof dynamicFormSchema>) {
     setIsLoading(true);
     try {
@@ -113,6 +112,7 @@ const CreateFormSubmit = ({ status, response }: any) => {
       formData.append("thumbnail", thumbnail as File);
       // preview video
       formData.append("preview_video", previewVideo as File);
+      formData.append("certification", values.certification);
       formData.append("orginal_video", originalVideo as File);
       formData.append("is_banner_video", "true");
       formData.append("created_by_id", userId || "");
@@ -441,7 +441,7 @@ const CreateFormSubmit = ({ status, response }: any) => {
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <ScrollArea className="h-60">
+                              <ScrollArea className="min-h-60">
                                 {item.options.map((option: any) => (
                                   <SelectItem
                                     key={option.value}

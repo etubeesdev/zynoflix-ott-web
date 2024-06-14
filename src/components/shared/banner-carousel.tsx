@@ -29,7 +29,7 @@ export function BannerCarousel() {
   if (error) return "An error has occurred: ";
 
   return (
-    <Carousel className="h-[650px]">
+    <Carousel className="h-[650px] w-full">
       <CarouselContent>
         {data.video.map((video: Ivideo, index: number) => (
           <CarouselItem key={index} className="">
@@ -42,7 +42,7 @@ export function BannerCarousel() {
                 muted
                 poster={PathLink(video.processedImages.medium.path)}
                 width="320"
-                className="w-full h-[600px] object-cover"
+                className="w-full h-[600px] aspect-auto object-cover"
                 height="240"
                 controls={false}
               >
