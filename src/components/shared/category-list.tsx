@@ -1,9 +1,7 @@
 "use client";
 import axios from "@/lib/axios";
-import { Video } from "lucide-react";
 import React from "react";
 import { useQuery } from "react-query";
-import VideoCard from "../card/video-card";
 import dynamic from "next/dynamic";
 const VideoCarousel = dynamic(() => import("../shared/video-scroll"));
 

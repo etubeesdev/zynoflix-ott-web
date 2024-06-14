@@ -1,4 +1,3 @@
-import AdsCard from "@/components/ads/ads-card";
 import { BannerCarousel } from "@/components/shared/banner-carousel";
 import dynamic from "next/dynamic";
 
@@ -8,6 +7,10 @@ const CategoryList = dynamic(
     ssr: false,
   }
 );
+
+const AdsCard = dynamic(() => import("@/components/ads/ads-card"), {
+  ssr: false,
+});
 
 export default function Home() {
   return (

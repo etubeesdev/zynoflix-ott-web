@@ -66,7 +66,7 @@ function VideoCarousel({
       }
     );
     if (response.status !== 200) {
-      throw new Error("Error adding video to watch later list");
+      toast.error(" Login to add video to watch later list");
     }
     refetch();
     toast.success("Video added to watch later list");
