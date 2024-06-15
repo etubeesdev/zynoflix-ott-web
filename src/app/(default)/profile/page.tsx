@@ -2,12 +2,12 @@
 import { UpdateImg } from "@/components/profile/update-img";
 import Loading from "@/components/ui/loading";
 import axios from "@/lib/axios";
-import { accessToken, userId } from "@/lib/user";
+import { userId } from "@/lib/user";
 import { Edit, Edit2 } from "lucide-react";
 import React from "react";
 import { useQuery } from "react-query";
 
-const page = () => {
+const Page = () => {
   const {
     data: user,
     isLoading,
@@ -72,4 +72,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
