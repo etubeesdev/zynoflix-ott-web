@@ -1,4 +1,5 @@
 import { BannerCarousel } from "@/components/shared/banner-carousel";
+import ListProduction from "@/components/shared/list-production";
 import dynamic from "next/dynamic";
 
 const CategoryList = dynamic(
@@ -18,6 +19,7 @@ export default function Home() {
       <div className="">
         <BannerCarousel />
         <section className="px-8 space-y-12 py-2">
+          <ListProduction />
           <CategoryList />
           <AdsCard />
         </section>

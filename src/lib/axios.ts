@@ -4,12 +4,9 @@ import { accessToken } from "./user";
 import dotenv from "dotenv";
 dotenv.config();
 
-console.log(process.env.BASE_API_URL, "api");
+console.log(process.env.NEXT_PUBLIC_API_URL, "api");
 
-const SERVER =
-  process.env.BASE_API_URL !== "development"
-    ? "http://localhost:8080"
-    : "http://65.0.55.141:8080";
+const SERVER = process.env.NEXT_PUBLIC_API_URL;
 
 // const SERVER = "http://65.0.55.141:8080";
 // const SERVER = "http://localhost:8080";

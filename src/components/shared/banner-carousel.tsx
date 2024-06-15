@@ -42,7 +42,7 @@ export function BannerCarousel() {
                 muted
                 poster={PathLink(video.processedImages.medium.path)}
                 width="320"
-                className="w-full h-[600px] aspect-auto object-cover"
+                className="w-full h-[650px] aspect-auto object-cover"
                 height="240"
                 controls={false}
               >
@@ -50,20 +50,20 @@ export function BannerCarousel() {
                 Your browser does not support the video tag.
               </video>
               <div className="video-overlay"></div>
-              <div className="absolute  top-[30%] left-12 right-0">
+              <div className="absolute  top-[45%] left-12 right-0">
                 <div className="">
                   <div className="w-1/2">
                     <div className="text-white">
-                      <h2 className="text-3xl w-1/2 line-clamp-2 font-bold">
+                      <h2 className="text-4xl line-clamp-3 font-bold">
                         {video.title}
                       </h2>
 
-                      <div className="gap-2 text-xs text-gray-300 flex items-center py-4">
+                      <div className="gap-2 text-base text-gray-300 flex items-center py-4">
                         <span className="">{video.language}</span>
                         <span>|</span>
                         <span className="">{video.category}</span>
                       </div>
-                      <p className="text-xs text-gray-300">
+                      <p className="text-base text-gray-300">
                         {video.description}
                       </p>
 

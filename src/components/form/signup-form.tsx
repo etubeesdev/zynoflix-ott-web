@@ -123,6 +123,7 @@ const SignupForm: React.FC<Props> = ({ mode }) => {
       try {
         localStorage.setItem("accessToken", response.data.accessToken);
         localStorage.setItem("userId", response.data.user._id);
+        localStorage.setItem("userRole", "production_company");
       } catch (e) {
         toast.error("Failed to save access token to local storage");
       }
