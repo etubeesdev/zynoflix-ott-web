@@ -1,18 +1,24 @@
 import SignupForm from "@/components/form/signup-form";
+import Link from "next/link";
 import React from "react";
 
 const page = () => {
   return (
-    <div>
-      <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
-        <div className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
-          <div className="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
-            <div>
-              <img
-                src="https://storage.googleapis.com/devitary-image-host.appspot.com/15846435184459982716-LogoMakr_7POjrN.png"
-                className="w-32 mx-auto"
-              />
-            </div>
+    <div className="">
+      <div className="min-h-screen bg-black text-gray-900 flex justify-center relative">
+        <video
+          loop
+          className="absolute z-20 inset-0 w-full h-full object-cover object-center bg-black opacity-70"
+          autoPlay
+          muted
+          controls={false}
+          preload="none"
+        >
+          <source src="/bg/bg-login.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div className="max-w-screen-xl z-50 m-0 sm:m-10 rounded-3xl flex justify-center flex-1 ">
+          <div className="lg:w-1/2 xl:w-5/12 p-6 border rounded-3xl bg-white sm:p-12">
             <div className="mt-12 flex flex-col items-center">
               <h1 className="text-2xl xl:text-3xl font-extrabold">Sign up</h1>
               <div className="w-full flex-1 mt-8">
@@ -40,6 +46,12 @@ const page = () => {
                     </div>
                     <span className="ml-4">Sign Up with Google</span>
                   </button>
+                  <Link
+                    href={"/signup/production"}
+                    className="w-full mt-4 max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
+                  >
+                    <span className="ml-4">Production Company Signup</span>
+                  </Link>
                 </div>
                 <div className="my-12 border-b text-center">
                   <div className="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
@@ -50,7 +62,7 @@ const page = () => {
                   <SignupForm mode="signup" />
 
                   <p className="mt-6 text-xs text-gray-600 text-center">
-                    I agree to abide by templatana
+                    I agree to abide by templatanas
                     <a
                       href="#"
                       className="border-b border-gray-500 border-dotted"
@@ -65,18 +77,17 @@ const page = () => {
                       Privacy Policy
                     </a>
                   </p>
-
-                  <div className="flex mt-3 text-sm justify-center text-gray-600 text-center items-center">
-                    <span>Already have an account?</span>
-                    <a href="/login">
-                      <span className="ml-2 text-blue-500">Login</span>
-                    </a>
-                  </div>
+                </div>
+                <div className="flex mt-3 text-sm justify-center text-gray-600 text-center items-center">
+                  <span>create new Account </span>
+                  <a href="/signup" className="text-indigo-400 ml-2">
+                    Signup
+                  </a>
                 </div>
               </div>
             </div>
           </div>
-          <div className="flex-1 bg-indigo-100 text-center hidden lg:flex">
+          {/* <div className="flex-1 bg-indigo-100 text-center hidden lg:flex">
             <div
               className="m-12 xl:m-16 w-full bg-contain bg-center bg-no-repeat"
               style={{
@@ -84,7 +95,7 @@ const page = () => {
                   'url("https://storage.googleapis.com/devitary-image-host.appspot.com/15848031292911696601-undraw_designer_life_w96d.svg")',
               }}
             ></div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

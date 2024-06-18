@@ -87,7 +87,7 @@ const ProductionForm: React.FC = () => {
         }
       );
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         localStorage.setItem("accessToken", response.data.accessToken);
         localStorage.setItem("userId", response.data.user._id);
         toast.success("Company created successfully");
@@ -115,7 +115,7 @@ const ProductionForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+    <form onSubmit={handleSubmit} className="max-w-3xl mx-auto">
       <div className="mb-4">
         <label htmlFor="name" className="block mb-2 font-bold">
           Name of Company:
@@ -126,7 +126,7 @@ const ProductionForm: React.FC = () => {
           name="name"
           value={formData.name}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500"
         />
         {errors.name && <p className="text-red-500">{errors.name}</p>}
       </div>
@@ -140,7 +140,7 @@ const ProductionForm: React.FC = () => {
           name="founderName"
           value={formData.founderName}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500"
         />
       </div>
       <div className="mb-4">
@@ -153,7 +153,7 @@ const ProductionForm: React.FC = () => {
           name="about"
           value={formData.about}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500"
         />
       </div>
       <div className="mb-4">
@@ -166,7 +166,7 @@ const ProductionForm: React.FC = () => {
           name="email"
           value={formData.email}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500"
         />
         {errors.email && <p className="text-red-500">{errors.email}</p>}
       </div>
@@ -180,7 +180,7 @@ const ProductionForm: React.FC = () => {
           name="contactNumber"
           value={formData.contactNumber}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500"
         />
       </div>
       <div className="mb-4">
@@ -193,7 +193,7 @@ const ProductionForm: React.FC = () => {
           name="password"
           value={formData.password}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500"
         />
       </div>
       <div className="mb-4">
@@ -205,15 +205,24 @@ const ProductionForm: React.FC = () => {
           id="logo"
           name="logo"
           onChange={handleFileChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500"
         />
+        {formData.logo && (
+          <div className="flex items-center justify-center">
+            <img
+              src={formData.logo ? URL.createObjectURL(formData.logo) : ""}
+              className="w-44 h-44 object-cover border rounded-2xl mt-2"
+            />
+          </div>
+        )}
+
         {errors.logo && <p className="text-red-500">{errors.logo}</p>}
       </div>
 
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full py-2 px-4 bg-blue-500 text-white font-bold rounded hover:bg-blue-700"
+        className="w-full py-2 px-4 bg-blue-500 text-white font-bold rounded-xl hover:bg-blue-700"
       >
         Submit
       </button>

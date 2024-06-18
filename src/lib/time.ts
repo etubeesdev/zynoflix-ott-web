@@ -1,5 +1,11 @@
 export function timeAgoString(publishedAt: any) {
-  const secondsAgo = Math.floor((Date.now() - publishedAt.getTime()) / 1000);
+  if (!(publishedAt instanceof Date)) {
+    console.log("publishedAt is not a Date object");
+  }
+
+  const formattedDate = new Date(publishedAt);
+
+  const secondsAgo = Math.floor((Date.now() - formattedDate.getTime()) / 1000);
 
   const minute = 60;
   const hour = 60 * minute;

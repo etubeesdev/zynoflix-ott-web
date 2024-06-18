@@ -5,21 +5,24 @@ import React from "react";
 const page = () => {
   return (
     <div>
-      <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
-        <div className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
-          <div className="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
-            <div>
-              <img
-                src="https://storage.googleapis.com/devitary-image-host.appspot.com/15846435184459982716-LogoMakr_7POjrN.png"
-                className="w-32 mx-auto"
-              />
-            </div>
+      <div className="min-h-screen bg-black relative text-gray-900 flex justify-center">
+        <video
+          loop
+          className="absolute z-20 inset-0 w-full h-full object-cover object-center bg-black opacity-70"
+          autoPlay
+          muted
+          controls={false}
+          preload="none"
+        >
+          <source src="/bg/bg-login.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div className="max-w-screen-xl z-50  m-0 sm:m-10 flex justify-center flex-1">
+          <div className="lg:w-1/2 xl:w-5/12 bg-white rounded-3xl p-6 sm:p-12">
             <div className="mt-12 flex flex-col items-center">
               <h1 className="text-2xl xl:text-3xl font-extrabold">Sign up</h1>
-              <div className="w-full flex-1 mt-8">
-                <div className="mx-auto max-w-xs">
-                  {/* <SignupForm mode="sig" /> */}
-
+              <div className="w-full mt-8">
+                <div className="mx-auto max-w-xl">
                   <ProductionForm />
                   <p className="mt-6 text-xs text-gray-600 text-center">
                     I agree to abide by templatana
@@ -47,15 +50,6 @@ const page = () => {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="flex-1 bg-indigo-100 text-center hidden lg:flex">
-            <div
-              className="m-12 xl:m-16 w-full bg-contain bg-center bg-no-repeat"
-              style={{
-                backgroundImage:
-                  'url("https://storage.googleapis.com/devitary-image-host.appspot.com/15848031292911696601-undraw_designer_life_w96d.svg")',
-              }}
-            ></div>
           </div>
         </div>
       </div>

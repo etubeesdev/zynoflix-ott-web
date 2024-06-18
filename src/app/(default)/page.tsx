@@ -1,9 +1,15 @@
 import { BannerCarousel } from "@/components/shared/banner-carousel";
-import ListProduction from "@/components/shared/list-production";
 import dynamic from "next/dynamic";
 
 const CategoryList = dynamic(
   () => import("@/components/shared/category-list"),
+  {
+    ssr: false,
+  }
+);
+
+const ListProduction = dynamic(
+  () => import("@/components/shared/list-production"),
   {
     ssr: false,
   }
@@ -18,7 +24,7 @@ export default function Home() {
     <main className="flex">
       <div className="">
         <BannerCarousel />
-        <section className="px-8 space-y-12 py-2">
+        <section className="px-8 space-y-12 pt-12 py-2">
           <ListProduction />
           <CategoryList />
           <AdsCard />

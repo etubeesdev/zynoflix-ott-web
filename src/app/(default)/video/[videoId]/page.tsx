@@ -8,6 +8,7 @@ import dynamic from "next/dynamic";
 import Loading from "@/components/ui/loading";
 import { timeAgoString } from "@/lib/time";
 import { useParams, useSearchParams } from "next/navigation";
+import Link from "next/link";
 const ProfileVideo = dynamic(() => import("@/components/video/profile-video"), {
   ssr: false,
 });
@@ -56,12 +57,19 @@ export default function Page({ params }: { params: { videoId: string } }) {
               <h5 className="text-sm video-content-holder-dot font-medium text-gray-600">
                 {video.category}
               </h5>
+              <span>|</span>
+              <div className="text-sm video-content-holder-dot font-medium text-gray-600">
+                {video.certification}
+              </div>
             </div>
           </div>
           <div className="">
-            <h2 className="lg:text-lg border px-4 py-1.5 rounded-full text-sm font-semibold">
+            <Link
+              href={"/payment"}
+              className="lg:text-lg border px-4 py-1.5 rounded-full text-sm font-semibold"
+            >
               Play on
-            </h2>
+            </Link>
           </div>
         </div>
         <ProfileVideo

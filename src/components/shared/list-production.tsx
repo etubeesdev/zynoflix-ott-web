@@ -8,8 +8,9 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "../ui/carousel";
-import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { LinkedinIcon, YoutubeIcon } from "lucide-react";
+import Link from "next/link";
 
 // Define the interface for a production company
 interface ProductionCompany {
@@ -65,31 +66,39 @@ const ListProduction: React.FC = () => {
   return (
     <div className="">
       <h1 className="text-3xl font-bold mb-6">Production Companies</h1>
-      <div className="">
-        <Carousel className={cn("w-full overflow-hidden !z-10")}>
-          <CarouselContent className="z-10 gap-6">
+      <div className="w-full">
+        <Carousel className="w-full max-w-[94vw]">
+          <CarouselContent className="z-10  gap-6">
             {productionCompanies &&
               productionCompanies?.map((company) => (
-                <div key={company._id} className="">
-                  <Image
-                    width={128}
-                    height={128}
-                    src={company.logo}
-                    alt={`${company.name} Logo`}
-                    className="border-2 rounded-full object-cover mb-4 mx-auto"
-                  />
-
-                  <h2 className="text-2xl pl-2 font-bold mb-2">
-                    {company.name}
-                  </h2>
-                  <p className="text-gray-700 pl-2 mb-2">
-                    Founder: {company.founderName}
-                  </p>
-                </div>
+                <Link
+                  href={"/production/" + company._id}
+                  key={company._id}
+                  className="bg-[#0f101e] border-[#ffffff1f] px-16 py-5 border rounded-3xl"
+                >
+                  <div className="flex items-center gap-8">
+                    <div className="founder-card-img">
+                      <Image
+                        width={220}
+                        height={223}
+                        src={company.logo}
+                        className="hover:scale-105"
+                        alt={`${company.name} Logo`}
+                      />
+                    </div>
+                    <div className="">
+                      <h2 className="text-3xl pl-2 font-bold mb-2">
+                        {company.name}
+                      </h2>
+                      <p className="text-[#92939e] pl-2 mb-2">Founder & CEO</p>
+                      <SocialButtons />
+                    </div>
+                  </div>
+                </Link>
               ))}
           </CarouselContent>
-          <CarouselPrevious className="ml-12" />
-          <CarouselNext className="mr-12" />
+          <CarouselPrevious className="ml-12 text-black" />
+          <CarouselNext className="mr-12 text-black" />
         </Carousel>
       </div>
     </div>
@@ -97,3 +106,61 @@ const ListProduction: React.FC = () => {
 };
 
 export default ListProduction;
+
+// Define a type for the social media link data
+interface SocialMediaLink {
+  name: string;
+  url: string;
+  icon: JSX.Element;
+}
+
+// Array of social media links
+export const socialLinks: SocialMediaLink[] = [
+  {
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/",
+    icon: <LinkedinIcon size={16} />,
+  },
+  {
+    name: "Custom Icon",
+    url: "#", // Placeholder URL
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        fill="none"
+      >
+        <path
+          d="M10.0596 7.34522L15.8879 0.570312H14.5068L9.44607 6.45287L5.40411 0.570312H0.742188L6.85442 9.46578L0.742188 16.5703H2.12338L7.4676 10.3581L11.7362 16.5703H16.3981L10.0593 7.34522H10.0596ZM8.16787 9.54415L7.54857 8.65836L2.62104 1.61005H4.74248L8.71905 7.29827L9.33834 8.18405L14.5074 15.5779H12.386L8.16787 9.54449V9.54415Z"
+          fill="currentColor"
+        ></path>
+      </svg>
+    ),
+  },
+  {
+    name: "YouTube",
+    url: "https://youtube.com/",
+
+    icon: <YoutubeIcon size={16} />,
+  },
+];
+
+export const SocialButtons: React.FC = () => {
+  return (
+    <div className="social-btn flex items-center gap-4">
+      {socialLinks.map((link) => (
+        <a
+          key={link.name}
+          href={link.url}
+          target="_blank"
+          className="border bg-white text-blue-500 p-2 rounded-full"
+          rel="noopener noreferrer"
+        >
+          {link.icon}
+        </a>
+      ))}
+    </div>
+  );
+};

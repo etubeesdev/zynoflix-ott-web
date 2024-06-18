@@ -1,9 +1,10 @@
 "use client";
+import VideoCard from "@/components/card/video-card";
 import { UpdateImg } from "@/components/profile/update-img";
 import Loading from "@/components/ui/loading";
 import axios from "@/lib/axios";
 import { userId } from "@/lib/user";
-import { Edit, Edit2 } from "lucide-react";
+import { Edit, Edit2, VideoIcon } from "lucide-react";
 import React from "react";
 import { useQuery } from "react-query";
 
@@ -16,6 +17,14 @@ const Page = () => {
   } = useQuery("user", async () => {
     const response = await axios.get(`/auth/user/${userId}`);
     return response.data.user;
+  });
+  const {
+    data: userVideos,
+    isLoading: videoLoading,
+    error: videoError,
+  } = useQuery("video", async () => {
+    const response = await axios.get(`/profile/video`);
+    return response.data.video;
   });
 
   if (isLoading)
@@ -66,6 +75,25 @@ const Page = () => {
           <p className="w-full text-gray-400 text-md text-pretty sm:text-center xs:text-justify">
             {user.description || "No description provided"}
           </p>
+        </div>
+        <div className="py-8 px-12">
+          <button className="flex items-center bg-green-500 rounded-xl px-6 py-3 gap-3">
+            <VideoIcon className="w-6 h-6" />
+            my Video
+          </button>
+
+          {userVideos?.length === 0 && (
+            <div className="flex items-center justify-center text-white text-2xl font-bold mt-8">
+              No Videos Uploaded
+            </div>
+          )}
+
+          <div className="grid pt-8 gap-6 grid-cols-5">
+            {userVideos?.length > 0 &&
+              userVideos?.map((video: any, index: number) => (
+                <VideoCard key={index} index={index} video={video} />
+              ))}
+          </div>
         </div>
       </div>
     </section>

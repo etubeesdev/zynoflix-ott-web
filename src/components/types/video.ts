@@ -1,5 +1,3 @@
-
-
 export interface Ivideo {
   _id: Id;
   title: string;
@@ -14,9 +12,22 @@ export interface Ivideo {
   is_feature_video: boolean;
   created_by_id: string;
   created_by_name: string;
+  certification: string;
   processedImages: ProcessedImages;
-  createdAt: CreatedAt;
-  updatedAt: UpdatedAt;
+  user: {
+    profilePic: string;
+    email: string;
+    full_name: string;
+    password: string;
+    followingId: string[];
+    membership: string;
+    is_active: boolean;
+    createdAt: any;
+    updatedAt: any;
+    __v: number;
+  };
+  createdAt: any;
+  updatedAt: any;
   __v: number;
   views: number;
   viewsId: ViewsId[];
@@ -56,14 +67,6 @@ export interface High {
   width: number;
   height: number;
   type: string;
-}
-
-export interface CreatedAt {
-  $date: string;
-}
-
-export interface UpdatedAt {
-  $date: string;
 }
 
 export interface ViewsId {

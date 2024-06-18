@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -15,7 +15,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { ScrollArea } from "../ui/scroll-area";
-import { useRouter } from "next/navigation";
 import {
   Select,
   SelectContent,
@@ -23,6 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
 import { Textarea } from "../ui/textarea";
 import axios from "@/lib/axios";
 import MultiSelect from "@/components/ui/multi-select";
@@ -85,10 +85,11 @@ const formDesign =
   "w-full bg-gray-800 border border-gray-500 rounded-2xl outline-none px-6 py-8 text-base";
 const formLabelClassName = "text-xl font-bold";
 
-const CreateFormSubmit = ({ status, response }: any) => {
+const CreateFormSubmit = ({ status, openPayModal, isSuccessful }: any) => {
   const [thumbnail, setThumbnail] = useState<any>("");
   const [previewVideo, setPreviewVideo] = useState<any>("");
   const [originalVideo, setOriginalVideo] = useState<any>("");
+  const [totallDuration, setTotallDuration] = useState<any>("");
 
   const [isLoading, setIsLoading] = useState(false);
   const [progressEvent, setProgressEvent] = useState(0);
@@ -107,7 +108,8 @@ const CreateFormSubmit = ({ status, response }: any) => {
       formData.append("description", values.description);
       formData.append("category", values.category);
       formData.append("language", values.language);
-      formData.append("duration", "working");
+      formData.append("duration", totallDuration);
+
       // thumbnail
       formData.append("thumbnail", thumbnail as File);
       // preview video
@@ -116,6 +118,7 @@ const CreateFormSubmit = ({ status, response }: any) => {
       formData.append("orginal_video", originalVideo as File);
       formData.append("is_banner_video", "true");
       formData.append("created_by_id", userId || "");
+      formData.append("user", userId || "");
       formData.append("created_by_name", "admin");
       const response1 = await axios.post(`/create_videos`, formData, {
         headers: {
@@ -132,10 +135,18 @@ const CreateFormSubmit = ({ status, response }: any) => {
 
       if (response1.status === 201) {
         toast.success("Banner video added successfully");
+
         // router.push("/dashboard/banner");
+        const transaction = localStorage.getItem("transactionId");
+        const response1 = await axios.put(`/payment/video/${transaction}`, {
+          status: "success",
+          isVideo_uploaded: true,
+        });
+        console.log(response1);
       } else {
         toast.error("Banner video added failed please try again");
       }
+
       setIsLoading(false);
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -292,6 +303,11 @@ const CreateFormSubmit = ({ status, response }: any) => {
                                         if (item.name === "original_video") {
                                           setOriginalVideo(e.target.files[0]);
                                         }
+                                        if (item.name === "original_video") {
+                                          setTotallDuration(
+                                            e.target.files[0].duration
+                                          );
+                                        }
 
                                         if (item.name === "preview_video") {
                                           setPreviewVideo(e.target.files[0]);
@@ -345,30 +361,6 @@ const CreateFormSubmit = ({ status, response }: any) => {
                                   )}
                               </div>
                             </label>
-                            {/* <div className="">
-                              {thumbnail && (
-                                <img
-                                  src={thumbnail}
-                                  alt=""
-                                  width={400}
-                                  height={300}
-                                />
-                              )}
-                            </div> */}
-                            {/* <Input
-                              onChange={async (e: any) => {
-                                console.log("working", e.target.files[0]);
-                                if (item.name === "thumbnail") {
-                                  setThumbnail(e.target.files[0]);
-                                }
-
-                                if (item.name === "preview_video") {
-                                  setPreviewVideo(e.target.files[0]);
-                                }
-                              }}
-                              type="file"
-                              placeholder={`Enter ${item.title}`}
-                            /> */}
                           </FormControl>
                           {field.value && (
                             <img
@@ -483,13 +475,37 @@ const CreateFormSubmit = ({ status, response }: any) => {
                   )}
                 </div>
               ))}
+
+              {isSuccessful && (
+                <div className="">
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Corrupti laborum assumenda maxime adipisci, cum commodi
+                    illum dicta obcaecati ea, facilis mollitia, perspiciatis ab
+                    repellat ad pariatur doloremque maiores saepe veniam.
+                  </p>
+                  {/* price 499 per video upload */}
+                  <p className="text-lg font-semibold">
+                    Price: 499 per video upload
+                  </p>
+                </div>
+              )}
               <div className="flex items-end justify-end">
-                <Button
-                  className="px-6 py-3 rounded-3xl border text-base font-semibold text-white bg-indigo-600 hover:bg-indigo-700"
-                  type="submit"
-                >
-                  Submit
-                </Button>
+                {isSuccessful ? (
+                  <div
+                    onClick={openPayModal}
+                    className="px-6 py-3 rounded-3xl cursor-pointer border text-base font-semibold text-white bg-indigo-600 hover:bg-indigo-700"
+                  >
+                    Payment
+                  </div>
+                ) : (
+                  <Button
+                    className="px-6 py-3 rounded-3xl border text-base font-semibold text-white bg-indigo-600 hover:bg-indigo-700"
+                    type="submit"
+                  >
+                    Upload
+                  </Button>
+                )}
               </div>
             </form>
           </Form>

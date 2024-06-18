@@ -12,6 +12,7 @@ import { useQuery } from "react-query";
 import Loading from "../ui/loading";
 import { Ivideo } from "../types/video";
 import { PathLink } from "@/lib/generate-aws-link";
+import Link from "next/link";
 
 // Mock API function
 const fetchBannerVideo = async () => {
@@ -54,22 +55,31 @@ export function BannerCarousel() {
                 <div className="">
                   <div className="w-1/2">
                     <div className="text-white">
-                      <h2 className="text-4xl line-clamp-3 font-bold">
+                      <h2 className="text-4xl title line-clamp-3 font-bold">
                         {video.title}
                       </h2>
 
-                      <div className="gap-2 text-base text-gray-300 flex items-center py-4">
-                        <span className="">{video.language}</span>
+                      <div className="gap-2 capitalize text-base text-white flex items-center py-4">
+                        <div className="border-2 border-cut bg-green-500 px-6 py-6 border-green-500 w-max rounded-t-xl">
+                          <span className="font-extrabold text-xl">
+                            {video.certification}
+                          </span>
+                        </div>
+                        <span className="pl-2">{video.language}</span>
                         <span>|</span>
                         <span className="">{video.category}</span>
                       </div>
-                      <p className="text-base text-gray-300">
+                      {/* <p className="text-base text-white">
                         {video.description}
-                      </p>
+                      </p> */}
 
-                      <button className="bg-white flex items-center gap-2 border rounded-full text-black px-4 py-2 mt-6">
-                        Watch Now
-                      </button>
+                      <Link
+                        href={`/video/${video._id}`}
+                        className="bg-green-500 w-max font-bold text-white flex items-center gap-2 rounded-xl px-6 py-3 mt-6"
+                      >
+                        <PlaySVG />
+                        PLAY
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -78,8 +88,33 @@ export function BannerCarousel() {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="ml-16" />
-      <CarouselNext className="mr-16" />
+      <CarouselPrevious className="ml-16 text-black" />
+      <CarouselNext className="mr-16 text-black" />
     </Carousel>
+  );
+}
+
+export function PlaySVG() {
+  return (
+    <svg
+      width={18}
+      height={18}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+      <g
+        id="SVGRepo_tracerCarrier"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ></g>
+      <g id="SVGRepo_iconCarrier">
+        <path
+          d="M21.4086 9.35258C23.5305 10.5065 23.5305 13.4935 21.4086 14.6474L8.59662 21.6145C6.53435 22.736 4 21.2763 4 18.9671L4 5.0329C4 2.72368 6.53435 1.26402 8.59661 2.38548L21.4086 9.35258Z"
+          fill="#fff"
+        ></path>{" "}
+      </g>
+    </svg>
   );
 }
