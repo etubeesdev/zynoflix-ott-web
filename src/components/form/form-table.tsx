@@ -28,7 +28,15 @@ import axios from "@/lib/axios";
 import MultiSelect from "@/components/ui/multi-select";
 import { formdata } from "@/constants/service-provider-form-data";
 import { userId } from "@/lib/user";
-
+const getAudioVideoDuration = async (file: File) => {
+  return new Promise((resolve, reject) => {
+    const media = document.createElement("video");
+    media.onloadedmetadata = () => {
+      resolve(media.duration);
+    };
+    media.src = URL.createObjectURL(file);
+  });
+};
 const dynamicFormSchema = z.object(
   formdata.reduce((acc: any, field: any) => {
     if (field.tag === "date") {
@@ -82,10 +90,12 @@ const dynamicFormSchema = z.object(
 );
 
 const formDesign =
-  "w-full bg-gray-800 border border-gray-500 rounded-2xl outline-none px-6 py-8 text-base";
+  "w-full bg-gray-800 border border-gray-500 rounded-2xl outline-none px-4 py-6 text-base";
 const formLabelClassName = "text-xl font-bold";
 
 const CreateFormSubmit = ({ status, openPayModal, isSuccessful }: any) => {
+  console.log(isSuccessful, "isSuccessful");
+
   const [thumbnail, setThumbnail] = useState<any>("");
   const [previewVideo, setPreviewVideo] = useState<any>("");
   const [originalVideo, setOriginalVideo] = useState<any>("");
@@ -297,20 +307,93 @@ const CreateFormSubmit = ({ status, openPayModal, isSuccessful }: any) => {
                                           "working",
                                           e.target.files[0]
                                         );
+
+                                        function convertHMS(props: {
+                                          value: string;
+                                        }) {
+                                          const { value } = props;
+                                          const sec = parseInt(value, 10); // convert value to number if it's string
+                                          let hours = `${Math.floor(
+                                            sec / 3600
+                                          )}`; // get hours
+                                          let minutes = `${Math.floor(
+                                            (sec - +hours * 3600) / 60
+                                          )}`; // get minutes
+                                          let seconds = `${
+                                            sec - +hours * 3600 - +minutes * 60
+                                          }`; //  get seconds
+                                          // add 0 if value < 10; Example: 2 => 02
+                                          if (+hours < 10) {
+                                            hours = "0" + hours;
+                                          }
+                                          if (+minutes < 10) {
+                                            minutes = "0" + minutes;
+                                          }
+                                          if (+seconds < 10) {
+                                            seconds = "0" + seconds;
+                                          }
+                                          return (
+                                            hours +
+                                            ":" +
+                                            minutes +
+                                            ":" +
+                                            seconds
+                                          ); // Return is HH : MM : SS
+                                        }
+                                        const file = e.target.files[0];
+
                                         if (item.name === "thumbnail") {
                                           setThumbnail(e.target.files[0]);
                                         }
                                         if (item.name === "original_video") {
                                           setOriginalVideo(e.target.files[0]);
                                         }
-                                        if (item.name === "original_video") {
-                                          setTotallDuration(
-                                            e.target.files[0].duration
-                                          );
-                                        }
 
                                         if (item.name === "preview_video") {
                                           setPreviewVideo(e.target.files[0]);
+                                        }
+
+                                        if (item.name === "original_video") {
+                                          new Promise(
+                                            async (resolve, reject) => {
+                                              let reader = new FileReader();
+                                              reader.onload = function () {
+                                                if (!reader.result) return;
+                                                let aud = new Audio(
+                                                  reader.result as string
+                                                );
+                                                aud.onloadedmetadata =
+                                                  function () {
+                                                    resolve(
+                                                      convertHMS({
+                                                        value: `${aud.duration}`,
+                                                      })
+                                                    );
+                                                  };
+                                              };
+
+                                              const durationVideo: any =
+                                                getAudioVideoDuration(file);
+                                              durationVideo
+                                                .then(function (value: any) {
+                                                  setTotallDuration(value);
+                                                  console.log(
+                                                    "duration",
+                                                    value
+                                                  );
+                                                })
+                                                .catch(function (error: any) {
+                                                  console.error(
+                                                    "Error:",
+                                                    error
+                                                  );
+                                                });
+
+                                              reader.readAsDataURL(file);
+                                            }
+                                          ).then((d) => {
+                                            return true;
+                                          });
                                         }
                                       }}
                                       type="file"

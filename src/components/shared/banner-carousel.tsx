@@ -26,7 +26,10 @@ const fetchBannerVideo = async () => {
 export function BannerCarousel() {
   const { data, error, isLoading } = useQuery("banner", fetchBannerVideo);
 
-  if (isLoading) return <Loading />;
+  if (isLoading)
+    return (
+      <Loading className="flex items-center justify-center mx-auto h-screen w-full" />
+    );
   if (error) return "An error has occurred: ";
 
   return (

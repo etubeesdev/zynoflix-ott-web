@@ -7,7 +7,7 @@ dotenv.config();
 
 console.log(process.env.NEXT_PUBLIC_API_URL, "api");
 
-const SERVER = "http://13.200.249.153:8080";
+const SERVER = process.env.NEXT_PUBLIC_API_URL;
 
 // const SERVER = "http://65.0.55.141:8080";
 // const SERVER = "http://localhost:8080";
@@ -16,10 +16,7 @@ const axios = Axios.create({
   baseURL: `${SERVER}/api`,
   headers: {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${
-      accessToken ||
-      (typeof window !== "undefined" && localStorage.getItem("accessToken"))
-    }`,
+    Authorization: `Bearer ${accessToken}`,
   },
 });
 

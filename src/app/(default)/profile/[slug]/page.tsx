@@ -3,13 +3,11 @@
 import { UpdateImg } from "@/components/profile/update-img";
 import Loading from "@/components/ui/loading";
 import axios from "@/lib/axios";
-import { isLogin, isProduction, userId } from "@/lib/user";
+import { isProduction, userId } from "@/lib/user";
 import { Edit, Edit2, VideoIcon } from "lucide-react";
 import dynamic from "next/dynamic";
-import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import React from "react";
 import { useQuery } from "react-query";
-import { toast } from "sonner";
 
 const VideoCard = dynamic(() => import("@/components/card/video-card"));
 
@@ -44,16 +42,7 @@ const Page = () => {
     const response = await axios.get(`/followers`);
     return response.data;
   });
-  const router = useRouter();
-  useEffect(() => {
-    if (isLogin) {
-      toast.warning(
-        "You need to login to add comment. Please login to add comment"
-      );
-      router.push("/login");
-      return;
-    }
-  }, []);
+
   if (isLoading)
     return <Loading className="h-screen flex items-center justify-center" />;
 
@@ -66,17 +55,10 @@ const Page = () => {
       ) : (
         <section className="w-full overflow-hidden dark:bg-gray-900">
           <div className="w-full mx-auto">
-            <UpdateImg
-              refetch={refetch}
-              id="backgroundPic"
-              name="backgroundPic"
-              button={
-                <img
-                  src={user?.backgroundPic}
-                  alt="User Cover"
-                  className="w-full xl:h-[20rem] object-cover lg:h-[22rem] md:h-[16rem] sm:h-[13rem] xs:h-[9.5rem]"
-                />
-              }
+            <img
+              src={user?.backgroundPic}
+              alt="User Cover"
+              className="w-full xl:h-[20rem] object-cover lg:h-[22rem] md:h-[16rem] sm:h-[13rem] xs:h-[9.5rem]"
             />
 
             {/* User Profile Image */}
@@ -87,19 +69,8 @@ const Page = () => {
                   alt="User Profile"
                   className="rounded-full object-cover xl:w-[16rem] xl:h-[16rem] lg:w-[16rem] lg:h-[16rem] md:w-[12rem] md:h-[12rem] sm:w-[10rem] sm:h-[10rem] xs:w-[8rem] xs:h-[8rem] outline outline-2 outline-offset-2 outline-yellow-500 shadow-xl relative xl:bottom-[7rem] lg:bottom-[8rem] md:bottom-[6rem] sm:bottom-[5rem] xs:bottom-[4.3rem]"
                 />
-                <UpdateImg
-                  refetch={refetch}
-                  id="profilePic"
-                  name="profilePic"
-                  button={
-                    <button className="absolute -top-20 -right-0 bg-gray-800 rounded-full p-1 cursor-pointer">
-                      <Edit className="w-6 h-6 text-white " />
-                    </button>
-                  }
-                />
               </div>
             </div>
-
             <div className="xl:w-[80%] lg:w-[90%] md:w-[94%] sm:w-[96%] xs:w-[92%] mx-auto flex flex-col gap-4 justify-center items-center relative xl:-top-[6rem] lg:-top-[6rem] md:-top-[4rem] sm:-top-[3rem] xs:-top-[2.2rem]">
               {/* add Follower Count  */}
               <div className="">
@@ -116,14 +87,6 @@ const Page = () => {
                 {user.description || "No description provided"}
               </p>
             </div>
-            <div className="">
-              {/* List and add email */}
-              <div className="flex flex-col items-center px-12 py-0">
-                <h3 className="text-xl font-bold text-white">Email</h3>
-                {user.email}
-              </div>
-            </div>
-
             <div className="py-8 px-12">
               <button className="flex items-center bg-green-500 rounded-xl px-6 py-3 gap-3">
                 <VideoIcon className="w-6 h-6" />

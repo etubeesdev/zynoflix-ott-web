@@ -3,7 +3,7 @@ import { UpdateImg } from "@/components/profile/update-img";
 import { SocialButtons } from "@/components/shared/list-production";
 import Loading from "@/components/ui/loading";
 import axios from "@/lib/axios";
-import { Edit, MessageCircle } from "lucide-react";
+import { Edit, MessageCircle, Plus } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { useQuery } from "react-query";
@@ -18,26 +18,21 @@ const fetchCategories = async (id: string) => {
   return response.data.productionCompany;
 };
 
-export default function Page({ params }: { params: { slug: string } }) {
+export default function ProductionProfile() {
   const router = useRouter();
   const {
     data: user,
     isLoading,
     error,
     refetch,
-  } = useQuery("video", () => fetchCategories(params.slug));
+  } = useQuery(["user", userId], () => fetchCategories(userId || ""));
 
   if (isLoading)
     return <Loading className="flex items-center h-screen justify-center" />;
 
   const handletoCreateRoom = async () => {
-    const RoomName = window.prompt("Enter Room Name");
-    if (!RoomName) {
-      return;
-    }
-
     const response = await axios.post("/room", {
-      name: RoomName,
+      name: user?.fullName,
       userIds: [userId, user?._id],
     });
 
@@ -135,11 +130,144 @@ export default function Page({ params }: { params: { slug: string } }) {
                   <MessageCircle className="w-6 h-6" />
                   Chat
                 </button>
+                <DialogSocial
+                  button={
+                    <button className="bg-green-500 text-white flex items-center gap-3 px-4 py-2 rounded-xl">
+                      {user?.socialMedia?.facebook ? (
+                        <Edit className="w-6 h-6" />
+                      ) : (
+                        <Plus className="w-6 h-6" />
+                      )}
+                      {!user?.socialMedia?.facebook
+                        ? "Add Social Media Links"
+                        : "Edit A Social Media Link"}
+                    </button>
+                  }
+                ></DialogSocial>
               </div>
             </div>
           </div>
         </div>
       </section>
     </main>
+  );
+}
+
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+
+import { useState } from "react";
+import { toast } from "sonner";
+
+export function DialogSocial({ button }: { button: React.ReactNode }) {
+  const [instagram, setInstagram] = useState("");
+  const [facebook, setFacebook] = useState("");
+  const [youtube, setYoutube] = useState("");
+  const [twitter, setTwitter] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
+  const handleSubmit = async () => {
+    setError(null); // Reset error state
+    try {
+      const response = await axios.put("/auth/production/user/", {
+        socialMedia: {
+          instagram,
+          facebook,
+          youtube,
+          twitter,
+        },
+      });
+
+      if (response.status === 200) {
+        toast.success("Links submitted successfully");
+        window.location.reload();
+      }
+
+      // Handle successful submission
+      console.log("Links submitted successfully");
+    } catch (error) {
+      setError((error as Error).message);
+    }
+  };
+
+  return (
+    <Dialog>
+      <DialogTrigger asChild>{button}</DialogTrigger>
+      <DialogContent className="sm:max-w-[625px]">
+        <DialogHeader>
+          <DialogTitle>Edit profile</DialogTitle>
+          <DialogDescription>
+            Add or update your social media links here. Click save when you are
+            done.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="grid gap-4 py-4">
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="instagram" className="text-right">
+              Instagram
+            </Label>
+            <Input
+              id="instagram"
+              value={instagram}
+              placeholder="https://www.instagram.com/username/"
+              onChange={(e) => setInstagram(e.target.value)}
+              className="col-span-3"
+            />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="facebook" className="text-right">
+              Facebook
+            </Label>
+            <Input
+              id="facebook"
+              placeholder="https://www.facebook.com/username/"
+              value={facebook}
+              onChange={(e) => setFacebook(e.target.value)}
+              className="col-span-3"
+            />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="youtube" className="text-right">
+              YouTube
+            </Label>
+            <Input
+              placeholder="https://www.youtube.com/channel/username/"
+              id="youtube"
+              value={youtube}
+              onChange={(e) => setYoutube(e.target.value)}
+              className="col-span-3"
+            />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="twitter" className="text-right">
+              Twitter
+            </Label>
+            <Input
+              id="twitter"
+              placeholder="https://twitter.com/username/"
+              value={twitter}
+              onChange={(e) => setTwitter(e.target.value)}
+              className="col-span-3"
+            />
+          </div>
+        </div>
+        {error && <div className="text-red-500">{error}</div>}
+        <DialogFooter>
+          <Button type="button" onClick={handleSubmit}>
+            Save changes
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }

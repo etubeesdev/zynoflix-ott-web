@@ -6,6 +6,7 @@ import { userId } from "@/lib/user";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { ScrollArea } from "../ui/scroll-area";
+import { timeAgoString } from "@/lib/time";
 
 const fetchChat = async (roomId: string) => {
   const response = await axios.get(
@@ -20,7 +21,10 @@ const ChatList = () => {
   const { roomId, socket } = useChat();
   const { data, isLoading, isError, refetch } = useQuery(
     ["message", roomId],
-    () => fetchChat(roomId)
+    () => fetchChat(roomId),
+    {
+      refetchInterval: 5000,
+    }
   );
 
   const handletosendMesssgae = () => {
@@ -32,6 +36,7 @@ const ChatList = () => {
     });
     setContent("");
     refetch();
+    refetch();
   };
 
   const isSender = "col-start-6";
@@ -42,7 +47,12 @@ const ChatList = () => {
   if (isError) return <div>Error fetching messages</div>;
 
   return (
-    <div className="flex-1 flex flex-col w-full p-6 bg-gray-900 rounded-3xl mx-6">
+    <div className="flex-1 flex flex-col w-full p-6 relative bg-gray-900 rounded-3xl mx-6">
+      {data.length === 0 && (
+        <div className="flex items-center justify-center absolute top-[40%] left-[45%]">
+          <p className="text-white">No messages yet</p>
+        </div>
+      )}
       <ScrollArea className="w-full h-[75vh]  mb-4">
         <div className="w-full">
           {data &&
@@ -56,21 +66,26 @@ const ChatList = () => {
               >
                 <div
                   className={cn(
-                    "flex items-center",
+                    "flex items-center gap-3",
                     message.sender === userId ? "flex-row-reverse" : "flex-row"
                   )}
                 >
-                  <div className="">
-                    <Image
-                      className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
-                      src={message.userId.profilePic}
-                      alt="profile-pic"
-                      width="30"
-                      height="30"
-                    />
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3">
+                      <Image
+                        className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
+                        src={message?.userId?.profilePic}
+                        alt="profile-pic"
+                        width="30"
+                        height="30"
+                      />
+                    </div>
+                    <div className="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
+                      <div>{message.content}</div>
+                    </div>
                   </div>
-                  <div className="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
-                    <div>{message.content}</div>
+                  <div className="text-white">
+                    <p>{timeAgoString(message.createdAt)}</p>
                   </div>
                 </div>
               </div>

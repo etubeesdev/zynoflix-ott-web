@@ -1,11 +1,13 @@
 import axios from "@/lib/axios";
 import { videoRatio } from "@/lib/config";
 import { PathLink } from "@/lib/generate-aws-link";
-import { timeAgoString } from "@/lib/time";
+import { convertMinutesToReadableFormat, timeAgoString } from "@/lib/time";
+import { isLogin } from "@/lib/user";
 import { cn } from "@/lib/utils";
 import { Heart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { toast } from "sonner";
@@ -33,8 +35,15 @@ const VideoCard = ({ video, index }: any) => {
     isLoading,
     refetch,
   } = useQuery("watch-later", fetchWatchLater);
-  if (isLoading) return <p>Loading...</p>;
+  const router = useRouter();
   const handletoWatch = async (id: any) => {
+    if (isLogin) {
+      toast.warning(
+        "You need to login to add comment. Please login to add comment"
+      );
+      router.push("/login");
+      return;
+    }
     const video_id = id;
     const response = await axios.post(
       `/watch-later/${video_id}`,
@@ -56,6 +65,11 @@ const VideoCard = ({ video, index }: any) => {
     refetch();
     toast.success("Video added to watch later list");
   };
+
+  const language =
+    typeof video?.language[0] === "string"
+      ? video.language[0].split(",")[0]
+      : "Unknown";
   return (
     <div
       onMouseEnter={() => setHoveredIndex(index)}
@@ -70,13 +84,13 @@ const VideoCard = ({ video, index }: any) => {
             className="text-red-500"
             size={24}
             fill={
-              watchLaterData.some((item: any) => item.video_id === video._id)
+              watchLaterData?.some((item: any) => item.video_id === video._id)
                 ? "fill"
                 : "none"
             }
             stroke="red"
             color={
-              watchLaterData.some((item: any) => item.video_id === video._id)
+              watchLaterData?.some((item: any) => item.video_id === video._id)
                 ? "red"
                 : "white"
             }
@@ -143,14 +157,17 @@ const VideoCard = ({ video, index }: any) => {
               <div className="font-medium dark:text-white">
                 <div>{video?.user?.full_name}</div>
                 <div className="text-sm text-gray-500 dark:text-gray-400">
-                  {video?.user?.followingId?.length} followers
+                  {video.followerCount} followers
                 </div>
               </div>
             </div>
 
             <div className="text-white capitalize gap-2 pt-2 flex flex-wrap text-xs font-bold">
-              <span>{video?.language}</span> <span>|</span>{" "}
-              <span>{video?.duration}</span> <span>|</span>
+              <span>{language}</span> <span>|</span>{" "}
+              <span>
+                {convertMinutesToReadableFormat(video?.duration, true)}
+              </span>{" "}
+              <span>|</span>
               <span className="text-xs font-bold">
                 {timeAgoString(video?.createdAt)}
               </span>

@@ -1,14 +1,15 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import "@vidstack/react/player/styles/base.css";
-
 import { useQuery } from "react-query";
 import axios from "@/lib/axios";
 import dynamic from "next/dynamic";
 import Loading from "@/components/ui/loading";
-import { timeAgoString } from "@/lib/time";
-import { useParams, useSearchParams } from "next/navigation";
+import { isMonthMembershipCompleted, timeAgoString } from "@/lib/time";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { userId } from "@/lib/user";
+import { toast } from "sonner";
 const ProfileVideo = dynamic(() => import("@/components/video/profile-video"), {
   ssr: false,
 });
@@ -19,7 +20,6 @@ const VideoPlayer = dynamic(() => import("@/components/video/video-player"), {
 
 export default function Page({ params }: { params: { videoId: string } }) {
   const ModeParams = useSearchParams();
-
   const mode = ModeParams.get("mode");
 
   const videoId = params.videoId;
@@ -32,14 +32,37 @@ export default function Page({ params }: { params: { videoId: string } }) {
     const response = await axios.get(`/video/${videoId}`);
     return response.data.video;
   });
+  const { data: user, isLoading: userLoading } = useQuery(
+    ["user", userId],
+    async () => {
+      const response = await axios.get(`/auth/user/${userId}`);
+      const isMembership = isMonthMembershipCompleted(
+        response.data.user.membershipId.createdAt
+      );
+
+      if (isMembership) {
+        toast.warning(
+          "You are watching a Promo video for watch full video subscription is required"
+        );
+      }
+
+      return response.data.user;
+    }
+  );
+
   if (isLoading)
     return <Loading className="h-screen flex items-center justify-center" />;
+
   if (error) return <p>Error: </p>;
+
+  const isMembership = isMonthMembershipCompleted(
+    user?.membershipId?.createdAt || new Date(-1)
+  );
 
   return (
     <main>
       <div className="">
-        <VideoPlayer mode={mode} video={video} />
+        <VideoPlayer isMembership={isMembership} mode={mode} video={video} />
       </div>
       <div className="p-6">
         <div className="w-full mt-4 flex pb-3 justify-between items-center">
@@ -65,10 +88,12 @@ export default function Page({ params }: { params: { videoId: string } }) {
           </div>
           <div className="">
             <Link
-              href={"/payment"}
-              className="lg:text-lg border px-4 py-1.5 rounded-full text-sm font-semibold"
+              href={isMembership ? "/membership" : "/profile"}
+              className="lg:text-base capitalize border px-4 py-1.5 rounded-full text-sm font-semibold"
             >
-              Play on
+              {isMembership
+                ? "Watch Full Film"
+                : "you watching a orginal video"}
             </Link>
           </div>
         </div>

@@ -67,7 +67,9 @@ const MultiSelect: React.FC<any> = ({ options, name, field, status }) => {
         </ul>
       )}
       <div className="mt-3">
-        <h3 className="text-sm font-medium">Selected Values:</h3>
+        {selectedOptions.length !== 0 && (
+          <h3 className="text-sm font-medium">Selected Language:</h3>
+        )}
         <ul className="list-disc pl-5">
           {selectedOptions?.map((option, index) => (
             <li key={index}>{option}</li>

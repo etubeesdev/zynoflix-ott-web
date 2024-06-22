@@ -2,6 +2,8 @@
 import CreateFormSubmit from "@/components/form/form-table";
 import axios from "@/lib/axios";
 import { ZRPKEY } from "@/lib/config";
+import { isLogin } from "@/lib/user";
+import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { useQuery } from "react-query";
 import { toast } from "sonner";
@@ -13,17 +15,28 @@ const Page = () => {
     return response.data;
   });
 
-  const isCompleted = data?.order.map(
-    (item: any) => item.isVideo_uploaded === false
+  const isCompleted = data?.order.filter(
+    (item: any) => item.membershipType === "upload-video"
   );
-  console.log(isCompleted, "isCompleted");
 
-  const [isSuccessful, setIsSuccessful] = React.useState<boolean>(
-    isCompleted?.[0]
-  );
-  console.log(transactionId, "transactionId");
+  const [isSuccessful, setIsSuccessful] = React.useState<boolean>(false);
+  const router = useRouter();
+  useEffect(() => {
+    if (isLogin) {
+      toast.warning(
+        "You need to login to add comment. Please login to add comment"
+      );
+      router.push("/login");
+      return;
+    }
+    if (isCompleted?.[0]?.isVideo_uploaded) {
+      setIsSuccessful(true);
+    }
+  }, [isCompleted]);
+
   const options = {
     key: ZRPKEY,
+    membershipType: "upload-video",
     amount: "49900", //  = INR 199
     name: "Zynoflix OTT Platform",
     description: "Month Membership",

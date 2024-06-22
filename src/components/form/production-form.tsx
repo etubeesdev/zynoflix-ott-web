@@ -108,7 +108,7 @@ const ProductionForm: React.FC = () => {
       setErrors({});
     } catch (error) {
       console.error("Error creating company:", error);
-      alert("Error creating company");
+      toast.error("Error creating company");
     } finally {
       setIsSubmitting(false);
     }

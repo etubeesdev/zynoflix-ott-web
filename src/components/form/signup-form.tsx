@@ -123,13 +123,17 @@ const SignupForm: React.FC<Props> = ({ mode }) => {
       try {
         localStorage.setItem("accessToken", response.data.accessToken);
         localStorage.setItem("userId", response.data.user._id);
-        localStorage.setItem("userRole", "production_company");
+        localStorage.setItem(
+          "userRole",
+          response.data.isProduction ? "production" : "user"
+        );
+        localStorage.setItem("isLogin", "true");
       } catch (e) {
         toast.error("Failed to save access token to local storage");
       }
 
       toast.success(`${mode === "login" ? "Login" : "Signup"} form submitted`);
-      navigate.push("/");
+      window.location.href = "/";
     } catch (error) {
       console.error("Submission error", error);
       toast.error("Failed to submit form please try again");
@@ -139,12 +143,12 @@ const SignupForm: React.FC<Props> = ({ mode }) => {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto">
+    <div className="w-full text-white max-w-md mx-auto">
       <form onSubmit={handleSubmit} noValidate>
         {mode === "signup" && (
           <div className="mb-4">
             <input
-              className={`w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border ${
+              className={`w-full px-8 py-4 rounded-lg font-medium  border-2 bg-transparent ${
                 errors.full_name ? "border-red-500" : "border-gray-200"
               } placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white`}
               type="text"
@@ -160,9 +164,9 @@ const SignupForm: React.FC<Props> = ({ mode }) => {
         )}
         <div className="mb-4">
           <input
-            className={`w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border ${
+            className={`w-full px-8 py-4 rounded-lg font-medium  bg-transparent  border-2 ${
               errors.email ? "border-red-500" : "border-gray-200"
-            } placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white`}
+            } text-sm focus:outline-none `}
             type="email"
             name="email"
             value={formData.email}
@@ -175,9 +179,9 @@ const SignupForm: React.FC<Props> = ({ mode }) => {
         </div>
         <div className="mb-4">
           <input
-            className={`w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border ${
+            className={`w-full px-8 py-4 rounded-lg font-medium bg-transparent  border-2 ${
               errors.password ? "border-red-500" : "border-gray-200"
-            } placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5`}
+            }  text-sm focus:outline-none  mt-5`}
             type="password"
             name="password"
             value={formData.password}
@@ -192,9 +196,9 @@ const SignupForm: React.FC<Props> = ({ mode }) => {
           <>
             <div className="mb-4">
               <input
-                className={`w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border ${
+                className={`w-full px-8 py-4 rounded-lg font-medium  border-2 bg-transparent ${
                   errors.confirmPassword ? "border-red-500" : "border-gray-200"
-                } placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5`}
+                }  text-sm focus:outline-none  mt-5`}
                 type="password"
                 name="confirmPassword"
                 value={formData.confirmPassword}
@@ -209,9 +213,9 @@ const SignupForm: React.FC<Props> = ({ mode }) => {
             </div>
             <div className="mb-4">
               <input
-                className={`w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border ${
+                className={`w-full px-8 py-4 rounded-lg font-medium  border-2 bg-transparent ${
                   errors.contact ? "border-red-500" : "border-gray-200"
-                } placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5`}
+                }  text-sm focus:outline-none  mt-5`}
                 type="tel"
                 name="contact"
                 value={formData.contact}

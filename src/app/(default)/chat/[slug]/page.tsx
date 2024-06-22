@@ -10,7 +10,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   return (
     <div>
       <ChatProvider roomId={params.slug}>
-        <div className="pt-12">
+        <div className="pt-20">
           <div className="">
             {/* demo */}
             <div className="flex h-[94.5vh] antialiased text-gray-800">

@@ -1,7 +1,9 @@
+"use client";
 import Header from "@/components/layout/header";
 import "./globals.css";
 
 import { Toaster, toast } from "sonner";
+import { AuthProvider } from "@/components/provider/AuthProvider";
 
 export default function RootLayout({
   children,
@@ -12,7 +14,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Header />
-        {children}
+        <AuthProvider>{children}</AuthProvider>
         <Toaster richColors />
       </body>
     </html>

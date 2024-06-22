@@ -54,6 +54,7 @@ export const formdata: any = [
     tag: "select-1",
     required: false,
     name: "certification",
+    placeholder: "Select Certificate",
     options: [
       { label: "U - Unrestricted", value: "U" },
       {

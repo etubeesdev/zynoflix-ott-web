@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import "@vidstack/react/player/styles/default/theme.css";
 import "@vidstack/react/player/styles/default/layouts/audio.css";
@@ -12,6 +12,9 @@ import {
 import { Ivideo } from "../types/video";
 import axios from "@/lib/axios";
 import { useQuery } from "react-query";
+import { useRouter } from "next/navigation";
+import { userId } from "@/lib/user";
+import Loading from "../ui/loading";
 
 export const textTracks = [
   // Subtitles
@@ -40,17 +43,15 @@ export const textTracks = [
 const VideoPlayer = ({
   video,
   mode,
+  isMembership,
 }: {
+  isMembership: any;
   video: Ivideo;
   mode: "orignal" | "preview" | any;
 }) => {
-  const { data, isLoading, error } = useQuery("view", async () => {
-    const response = await axios.post(`/video/view/${video._id}`);
-    return response.data;
-  });
   if (!video) return null;
-  const videoLink =
-    mode === "orignal" ? video?.original_video : video?.preview_video;
+  const videoLink = isMembership ? video?.original_video : video?.preview_video;
+
   return (
     <div className="">
       <MediaPlayer

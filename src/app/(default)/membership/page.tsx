@@ -1,6 +1,7 @@
 "use client";
 import axios from "@/lib/axios";
 import { ZRPKEY } from "@/lib/config";
+import { isLogin } from "@/lib/user";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { toast } from "sonner";
@@ -54,6 +55,14 @@ const Page = () => {
   };
 
   const openPayModal = async (options: any) => {
+    if (isLogin) {
+      toast.warning(
+        "You need to login to add comment. Please login to add comment"
+      );
+      router.push("/login");
+      return;
+    }
+
     const response = await axios.post("/payment", options);
 
     console.log(response.data.order);

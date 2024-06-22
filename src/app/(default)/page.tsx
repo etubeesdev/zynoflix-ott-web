@@ -1,3 +1,5 @@
+"use client";
+
 import { BannerCarousel } from "@/components/shared/banner-carousel";
 import dynamic from "next/dynamic";
 
