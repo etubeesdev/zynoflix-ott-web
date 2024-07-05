@@ -21,7 +21,7 @@ const ChatProvider = ({ children, roomId }: any) => {
   const [socket, setSocket] = useState<any>(null);
 
   useEffect(() => {
-    const newSocket = io("http://zynoflixott.com:3003"); // Update with your server address
+    const newSocket = io("https://chat.zynoflixott.com"); // Update with your server address
     setSocket(newSocket);
     return () => {
       newSocket.disconnect();
