@@ -18,12 +18,12 @@ const AdsCard = () => {
       return data;
     },
   });
-  
+
   if (isLoading) return <Loading />;
 
   return (
     <div>
-      <Link href={data[0]?.link} className="">
+      <Link href={data?.[0]?.link} className="">
         <video
           preload="auto"
           playsInline

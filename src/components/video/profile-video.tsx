@@ -174,7 +174,13 @@ const ProfileVideo = ({
             <div className="flex items-center">
               <div className=" flex items-center">
                 <h5 className="gap-2 flex items-center">
-                  Total Duration : <span>{video.duration}</span>
+                  Total Duration :{" "}
+                  <span>
+                    {convertMinutesToReadableFormat(
+                      video.duration as any,
+                      false
+                    )}
+                  </span>
                 </h5>
               </div>
             </div>
@@ -207,6 +213,7 @@ import VideoComment from "../shared/video-comment";
 import { toast } from "sonner";
 import { authId, isLogin } from "@/lib/user";
 import { useRouter } from "next/navigation";
+import { convertMinutesToReadableFormat } from "@/lib/time";
 
 export function DialogDShare() {
   const pageUrl = window.location.href;

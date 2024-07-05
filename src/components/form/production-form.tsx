@@ -126,7 +126,7 @@ const ProductionForm: React.FC = () => {
           name="name"
           value={formData.name}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500"
+          className="w-full px-3 py-2 border border-gray-300 text-black rounded-xl focus:outline-none focus:border-blue-500"
         />
         {errors.name && <p className="text-red-500">{errors.name}</p>}
       </div>
@@ -140,7 +140,7 @@ const ProductionForm: React.FC = () => {
           name="founderName"
           value={formData.founderName}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-xl text-black focus:outline-none focus:border-blue-500"
         />
       </div>
       <div className="mb-4">
@@ -153,7 +153,7 @@ const ProductionForm: React.FC = () => {
           name="about"
           value={formData.about}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-xl text-black focus:outline-none focus:border-blue-500"
         />
       </div>
       <div className="mb-4">
@@ -166,7 +166,7 @@ const ProductionForm: React.FC = () => {
           name="email"
           value={formData.email}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-xl text-black focus:outline-none focus:border-blue-500"
         />
         {errors.email && <p className="text-red-500">{errors.email}</p>}
       </div>
@@ -180,7 +180,7 @@ const ProductionForm: React.FC = () => {
           name="contactNumber"
           value={formData.contactNumber}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-xl text-black focus:outline-none focus:border-blue-500"
         />
       </div>
       <div className="mb-4">
@@ -193,7 +193,7 @@ const ProductionForm: React.FC = () => {
           name="password"
           value={formData.password}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-xl text-black focus:outline-none focus:border-blue-500"
         />
       </div>
       <div className="mb-4">
@@ -205,7 +205,7 @@ const ProductionForm: React.FC = () => {
           id="logo"
           name="logo"
           onChange={handleFileChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:border-blue-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-xl  text-black focus:outline-none focus:border-blue-500"
         />
         {formData.logo && (
           <div className="flex items-center justify-center">

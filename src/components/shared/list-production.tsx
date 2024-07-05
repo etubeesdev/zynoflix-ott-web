@@ -89,7 +89,7 @@ const ListProduction: React.FC = () => {
                         width={220}
                         height={220}
                         src={company.logo}
-                        className="hover:scale-105 transition-transform w-44 h-44 rounded-full object-cover object-center duration-300 ease-in-out"
+                        className="hover:scale-105 transition-transform w-32 h-32 rounded-full object-cover object-center duration-300 ease-in-out"
                         alt={`${company.name} Logo`}
                       />
                     </div>

@@ -55,20 +55,13 @@ export default function Page({ params }: { params: { slug: string } }) {
     <main>
       <section className="w-full overflow-hidden dark:bg-gray-900">
         <div className="w-full mx-auto">
-          <UpdateImg
-            refetch={refetch}
-            id="backgroundPic"
-            name="backgroundPic"
-            button={
-              <Image
-                width={1920}
-                height={1080}
-                title="Edit Background Image"
-                src={user?.backgroundImage}
-                alt="User Cover"
-                className="w-full xl:h-[20rem] hover:cursor-pointer object-cover lg:h-[22rem] md:h-[16rem] sm:h-[13rem] xs:h-[9.5rem]"
-              />
-            }
+          <Image
+            width={1920}
+            height={1080}
+            title="Edit Background Image"
+            src={user?.backgroundImage}
+            alt="User Cover"
+            className="w-full xl:h-[20rem] hover:cursor-pointer object-cover lg:h-[22rem] md:h-[16rem] sm:h-[13rem] xs:h-[9.5rem]"
           />
 
           {/* User Profile Image */}
@@ -80,16 +73,6 @@ export default function Page({ params }: { params: { slug: string } }) {
                 src={user?.logo}
                 alt="User Profile"
                 className="rounded-full object-cover xl:w-[16rem] xl:h-[16rem] lg:w-[16rem] lg:h-[16rem] md:w-[12rem] md:h-[12rem] sm:w-[10rem] sm:h-[10rem] xs:w-[8rem] xs:h-[8rem] outline outline-2 outline-offset-2 outline-yellow-500 shadow-xl relative xl:bottom-[7rem] lg:bottom-[8rem] md:bottom-[6rem] sm:bottom-[5rem] xs:bottom-[4.3rem]"
-              />
-              <UpdateImg
-                refetch={refetch}
-                id="profilePic"
-                name="profilePic"
-                button={
-                  <button className="absolute -top-20 -right-0 bg-gray-800 rounded-full p-1 cursor-pointer">
-                    <Edit className="w-6 h-6 text-white " />
-                  </button>
-                }
               />
             </div>
           </div>

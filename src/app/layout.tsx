@@ -4,6 +4,7 @@ import "./globals.css";
 
 import { Toaster, toast } from "sonner";
 import { AuthProvider } from "@/components/provider/AuthProvider";
+import Footer from "@/components/shared/footer";
 
 export default function RootLayout({
   children,
@@ -16,6 +17,7 @@ export default function RootLayout({
         <Header />
         <AuthProvider>{children}</AuthProvider>
         <Toaster richColors />
+        <Footer />
       </body>
     </html>
   );

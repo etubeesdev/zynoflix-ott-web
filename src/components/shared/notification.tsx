@@ -14,9 +14,13 @@ interface Item {
   time: string;
 }
 const getNotifications = async () => {
-  const response = await axios.get("/notification");
-  const data = await response.data;
-  return data;
+  try {
+    const response = await axios.get("/notification");
+    const data = await response.data;
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const NotificationBell = () => {
@@ -31,7 +35,7 @@ const NotificationBell = () => {
   }, []);
 
   const mapNotificationData = (notificationData: any[]): any[] => {
-    return notificationData.map((item) => ({
+    return notificationData?.map((item) => ({
       name: item.title,
       description: item.message,
       time: timeAgoString(item.createdAt),
@@ -46,15 +50,12 @@ const NotificationBell = () => {
   return (
     <Popover>
       <PopoverTrigger>
-        {" "}
         <button>
           <Bell size={24} />
         </button>
       </PopoverTrigger>
       <PopoverContent className="max-w-full rounded-3xl mr-6 w-[400px]">
-        <ScrollArea className="h-[400px]">
-          <AnimatedListDemo notifications={notifications} />
-        </ScrollArea>
+        <AnimatedListDemo notifications={notifications} />
       </PopoverContent>
     </Popover>
   );
@@ -63,7 +64,6 @@ const NotificationBell = () => {
 export default NotificationBell;
 
 import { cn } from "@/lib/utils";
-import { AnimatedList } from "@/components/magicui/animated-list";
 import { ScrollArea } from "../ui/scroll-area";
 import axios from "@/lib/axios";
 import Image from "next/image";
@@ -73,11 +73,11 @@ const Notification = ({ name, description, icon, color, time }: Item) => {
   return (
     <figure
       className={cn(
-        "relative mx-auto w-full max-w-[400px] transform cursor-pointer overflow-hidden rounded-2xl p-4",
+        "relative mx-auto mt-4 w-full h-full max-w-[400px] transform cursor-pointer overflow-hidden rounded-2xl p-4",
         // animation styles
         "transition-all duration-200 ease-in-out hover:scale-[103%]",
         // light styles
-        "bg-white [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)]",
+        "bg-white border",
         // dark styles
         "transform-gpu dark:bg-transparent dark:backdrop-blur-md dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset]"
       )}
@@ -121,10 +121,11 @@ export function AnimatedListDemo({ notifications }: any) {
           No Notifications
         </div>
       )}
-
-      {notifications.map((item: any, idx: number) => (
-        <Notification {...item} key={idx} />
-      ))}
+      <ScrollArea className="h-[400px]">
+        {notifications.map((item: any, idx: number) => (
+          <Notification {...item} key={idx} />
+        ))}
+      </ScrollArea>
       {/* </AnimatedList> */}
     </div>
   );

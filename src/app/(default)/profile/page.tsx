@@ -56,7 +56,15 @@ const Page = () => {
   }, []);
   if (isLoading)
     return <Loading className="h-screen flex items-center justify-center" />;
+  const handletoLogout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userRole");
+    localStorage.removeItem("isLogin");
+    localStorage.removeItem("transactionId");
 
+    router.push("/login");
+  };
   return (
     <main>
       {isProduction === "production" ? (
@@ -101,6 +109,12 @@ const Page = () => {
             </div>
 
             <div className="xl:w-[80%] lg:w-[90%] md:w-[94%] sm:w-[96%] xs:w-[92%] mx-auto flex flex-col gap-4 justify-center items-center relative xl:-top-[6rem] lg:-top-[6rem] md:-top-[4rem] sm:-top-[3rem] xs:-top-[2.2rem]">
+              <button
+                onClick={handletoLogout}
+                className="absolute top-0 left-0 bg-blue-500 px-4 py-2 rounded-xl"
+              >
+                Logout
+              </button>
               {/* add Follower Count  */}
               <div className="">
                 <div className="text-3xl text-gray-100 dark:text-gray-400">
@@ -136,10 +150,15 @@ const Page = () => {
                 </div>
               )}
 
-              <div className="grid pt-8 gap-6 grid-cols-5">
+              <div className="grid pt-8  gap-6 grid-cols-5">
                 {userVideos?.length > 0 &&
                   userVideos?.map((video: any, index: number) => (
-                    <VideoCard key={index} index={index} video={video} />
+                    <VideoCard
+                      hiddenNew={true}
+                      key={index}
+                      index={index}
+                      video={video}
+                    />
                   ))}
               </div>
             </div>

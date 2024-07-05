@@ -27,7 +27,7 @@ const fetchWatchLater = async () => {
 
   return response.data;
 };
-const VideoCard = ({ video, index }: any) => {
+const VideoCard = ({ video, index, hiddenNew }: any) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const {
@@ -96,14 +96,16 @@ const VideoCard = ({ video, index }: any) => {
             }
           />
         </button>
-        <div className="absolute top-4 z-50 left-6">
-          <div className="border-cut shadow-2xl flex items-center flex-col rounded-t-md bg-green-500 px-2 py-3">
-            <span className="text-black text-sm font-bold">NEW</span>
-            <span className="text-black text-xs font-extrabold">
-              {video.certification}
-            </span>
+        {!hiddenNew && (
+          <div className="absolute top-4 z-50 left-6">
+            <div className="border-cut shadow-2xl flex items-center flex-col rounded-t-md bg-green-500 px-2 py-3">
+              <span className="text-black text-sm font-bold">NEW</span>
+              <span className="text-black text-xs font-extrabold">
+                {video.certification}
+              </span>
+            </div>
           </div>
-        </div>
+        )}
         <Link href={`/video/${video?._id}`} className="">
           <div className={"duration-300"}>
             <div className="relative">

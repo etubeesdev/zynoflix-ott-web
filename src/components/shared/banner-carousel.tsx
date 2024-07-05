@@ -63,7 +63,7 @@ export function BannerCarousel() {
                       </h2>
 
                       <div className="gap-2 capitalize text-base text-white flex items-center py-4">
-                        <div className="border-2 border-cut bg-green-500 px-6 py-6 border-green-500 w-max rounded-t-xl">
+                        <div className="border-2 border-cut bg-green-500 px-4 py-4 border-green-500 w-max rounded-t-xl">
                           <span className="font-extrabold text-xl">
                             {video.certification}
                           </span>

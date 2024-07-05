@@ -8,7 +8,7 @@ import { useChat } from "../provider/ChatProvider";
 import Link from "next/link";
 import { userId } from "@/lib/user";
 
-const fetchChat = async () => {
+ const fetchChat = async () => {
   const response = await axios.get("/chat/");
   if (response.status === 200) {
     console.log("Network response was not ok");

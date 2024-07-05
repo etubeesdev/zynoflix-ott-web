@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import NotificationBell from "../shared/notification";
+import SearchComponnets from "../shared/search-components";
 
 const Header = () => {
   const [loggedIn, setLoggedIn] = useState<boolean | null>(null);
@@ -17,10 +18,10 @@ const Header = () => {
     return <div>Loading...</div>; // Placeholder to ensure server and client render the same initially
   }
   return (
-    <header className="!bg-transparent !text-white">
+    <header className="!bg-transparent relative !z-[999] !text-white">
       <div className="video-overlay-header"></div>
       <nav className="px-4 absolute top-0 left-0 right-0 z-50 bg !bg-transparent lg:px-8 py-2.5">
-        <div className="flex flex-wrap justify-between ">
+        <div className="flex flex-wrap justify-between">
           <Link href="/" className="flex items-center">
             <Image
               width={134}
@@ -30,7 +31,7 @@ const Header = () => {
               alt="Flowbite Logo"
             />
           </Link>
-
+          {!isLogin && <SearchComponnets />}
           <div className="flex items-center lg:order-2">
             {!loggedIn ? (
               <Link
@@ -48,7 +49,7 @@ const Header = () => {
               </Link>
             )}
 
-            {!loggedIn && (
+            {loggedIn && (
               <Link
                 href="/membership"
                 className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
@@ -63,8 +64,14 @@ const Header = () => {
             >
               Upload a Video
             </Link>
+            <Link
+              href="/chat"
+              className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+            >
+              Chat
+            </Link>
+            {!isLogin && <NotificationBell />}
 
-            <NotificationBell />
             <button
               data-collapse-toggle="mobile-menu-2"
               type="button"
