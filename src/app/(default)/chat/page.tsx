@@ -2,7 +2,6 @@
 import ChatList from "@/components/chat/list-chat";
 import { ChatProvider } from "@/components/provider/ChatProvider";
 import axios from "@/lib/axios";
-import { userId } from "@/lib/user";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useQuery } from "react-query";
@@ -21,7 +20,6 @@ const Page = () => {
   const { data, isLoading, isError, refetch } = useQuery("chat", () => {
     fetchChat();
   });
-  console.log(data);
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error fetching messages</div>;
