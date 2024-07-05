@@ -9,9 +9,7 @@ import { ScrollArea } from "../ui/scroll-area";
 import { timeAgoString } from "@/lib/time";
 
 const fetchChat = async (roomId: string) => {
-  const response = await axios.get(
-    "http://localhost:8080/api/message/" + roomId
-  );
+  const response = await axios.get("/message/" + roomId);
 
   return response.data;
 };

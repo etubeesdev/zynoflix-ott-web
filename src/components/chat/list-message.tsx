@@ -4,9 +4,7 @@ import { useChat } from "../provider/ChatProvider";
 import axios from "@/lib/axios";
 
 const fetchChat = async (roomId: string) => {
-  const response = await axios.get(
-    "http://localhost:8080/api/message/" + roomId
-  );
+  const response = await axios.get("/message/" + roomId);
   if (response.status === 200) {
     console.log("Network response was not ok");
   }
