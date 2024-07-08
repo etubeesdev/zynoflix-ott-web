@@ -87,22 +87,18 @@ const ProductionForm: React.FC = () => {
         }
       );
 
+      console.log(response.status, "Network");
+
       if (response.status === 201) {
         localStorage.setItem("accessToken", response.data.accessToken);
-        localStorage.setItem("userId", response.data.user._id);
+        localStorage.setItem("userId", response.data.userId);
         toast.success("Company created successfully");
         router.push("/");
+      } else {
+        toast.error("Error creating company");
       }
-      toast.error("Error creating company");
-      // if (response.data.message === "User created") {
-      //   localStorage.setItem("accessToken", response.data.accessToken);
-      //   localStorage.setItem("userId", response.data.user._id);
-      //   toast.success("Company created successfully");
-      //   router.push("/");
-      // } else {
-      //   toast.error("Error creating company");
-      // }
 
+      // Reset form data and errors
       setFormData({
         name: "",
         founderName: "",
@@ -115,9 +111,7 @@ const ProductionForm: React.FC = () => {
       setErrors({});
     } catch (error) {
       console.error("Error creating company:", error);
-      toast.error("Error creating company");
-    } finally {
-      setIsSubmitting(false);
+      // toast.error("Error creating company");
     }
   };
 
