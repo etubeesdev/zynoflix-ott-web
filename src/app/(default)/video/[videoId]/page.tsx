@@ -64,29 +64,29 @@ export default function Page({ params }: { params: { videoId: string } }) {
       <div className="">
         <VideoPlayer isMembership={isMembership} mode={mode} video={video} />
       </div>
-      <div className="p-6">
-        <div className="w-full mt-4 flex pb-3 justify-between items-center">
+      <div className="lg:p-6 p-3">
+        <div className="w-full mt-4 flex lg:flex-row flex-col pb-3 justify-between items-start lg:items-center">
           <div className="w-3/4">
-            <h3 className="text-xl font-bold">{video.title}</h3>
+            <h3 className="lg:text-xl text-lg font-bold">{video.title}</h3>
             <div className="flex w-full gap-4 items-center">
-              <p className="text-sm font-medium text-gray-600">
+              <p className="lg:text-sm text-xs font-medium text-gray-600">
                 {video.views} Views
               </p>
               <span>|</span>
-              <p className="text-sm video-content-holder-dot font-medium text-gray-600">
+              <p className="lg:text-sm text-xs video-content-holder-dot font-medium text-gray-600">
                 {timeAgoString(new Date(video.createdAt))}
               </p>
               <span>|</span>
-              <h5 className="text-sm video-content-holder-dot font-medium text-gray-600">
+              <h5 className="lg:text-sm text-xs video-content-holder-dot font-medium text-gray-600">
                 {video.category}
               </h5>
               <span>|</span>
-              <div className="text-sm video-content-holder-dot font-medium text-gray-600">
+              <div className="lg:text-sm text-xs video-content-holder-dot font-medium text-gray-600">
                 {video.certification}
               </div>
             </div>
           </div>
-          <div className="">
+          <div className="lg:pt-0 pt-4 lg:pb-0 pb-4">
             <Link
               href={isMembership ? "/membership" : "/profile"}
               className="lg:text-base capitalize border px-4 py-1.5 rounded-full text-sm font-semibold"

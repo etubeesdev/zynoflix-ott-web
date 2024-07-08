@@ -71,9 +71,11 @@ const ListProduction: React.FC = () => {
 
   return (
     <div className="">
-      <h1 className="text-3xl font-bold mb-6">Production Companies</h1>
+      <h1 className="lg:text-3xl text-xl font-bold mb-6">
+        Production Companies
+      </h1>
       <div className="w-full">
-        <Carousel className="w-full max-w-[94vw]">
+        <Carousel className="w-full max-w-[91vw] lg:max-w-[94vw]">
           <CarouselContent className="z-10  gap-6">
             {productionCompanies &&
               productionCompanies?.map((company) => (
@@ -89,7 +91,7 @@ const ListProduction: React.FC = () => {
                         width={220}
                         height={220}
                         src={company.logo}
-                        className="hover:scale-105 transition-transform w-32 h-32 rounded-full object-cover object-center duration-300 ease-in-out"
+                        className="hover:scale-105 transition-transform lg:w-32 w-24 h-24 lg:h-32 rounded-full object-cover object-center duration-300 ease-in-out"
                         alt={`${company.name} Logo`}
                       />
                     </div>

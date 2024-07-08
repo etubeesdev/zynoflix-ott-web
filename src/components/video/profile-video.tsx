@@ -114,7 +114,7 @@ const ProfileVideo = ({
   return (
     <div>
       <div className="">
-        <div className="flex border-t border-b py-4 border-gray-600 items-center gap-4">
+        <div className="flex justify-between lg:justify-start border-t border-b py-4 border-gray-600 items-center gap-4">
           <Link href={`/profile/${userId}`} className="flex items-center gap-3">
             <Image
               width={40}
@@ -133,7 +133,7 @@ const ProfileVideo = ({
           <button
             onClick={handletoFollow}
             className={cn(
-              "border-2 border-green-500 flex-shrink-0 hidden lg:flex duration-300 justify-center gap-2 py-2 px-4 text-xs lg:text-base items-center rounded-full lg:rounded-xl  z-50 relative  font-semibold capitalize",
+              "border-2 border-green-500 flex-shrink-0  lg:flex duration-300 justify-center gap-2 py-2 px-4 text-xs lg:text-base items-center rounded-full lg:rounded-xl  z-50 relative  font-semibold capitalize",
               follower?.[0]?.user_id.includes(authId)
                 ? " bg-green-500 text-white"
                 : "bg-transparent "
@@ -169,7 +169,7 @@ const ProfileVideo = ({
           <DialogDShare />
         </div>
 
-        <div className="mt-5 flex items-start gap-6">
+        <div className="mt-5 flex items-start lg:flex-row flex-col gap-6">
           <div className="text-subtext flex-1 flex-col bg-gray-900 px-6 py-3 rounded-xl lg:flex  ">
             <div className="flex items-center">
               <div className=" flex items-center">
@@ -184,9 +184,10 @@ const ProfileVideo = ({
                 </h5>
               </div>
             </div>
-            <div className="text-base py-2 w-[90%] text-gray-300 lg:w-3/4 font-normal text-subtext">
+            <Description text={video.description} maxLength={200} />
+            {/* <div className="text-base py-2 w-[90%] text-gray-300 lg:w-3/4 font-normal text-subtext">
               {video.description}
-            </div>
+            </div> */}
           </div>
           <VideoComment videoId={video._id} />
         </div>
@@ -332,3 +333,34 @@ export function DialogDShare() {
     </Dialog>
   );
 }
+// components/Description.tsx
+import { useState } from "react";
+
+interface DescriptionProps {
+  text: string;
+  maxLength: number;
+}
+
+const Description: React.FC<DescriptionProps> = ({ text, maxLength }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const toggleExpansion = () => {
+    setIsExpanded(!isExpanded);
+  };
+
+  const shouldShowButton = text.length > maxLength;
+  const displayText = isExpanded
+    ? text
+    : text.substring(0, maxLength) + (shouldShowButton ? "..." : "");
+
+  return (
+    <div className="text-base py-2 w-[90%] text-gray-300 lg:w-3/4 font-normal text-subtext">
+      {displayText}
+      {shouldShowButton && (
+        <button onClick={toggleExpansion} className="ml-2 text-blue-500">
+          {isExpanded ? "Show Less" : "Show More"}
+        </button>
+      )}
+    </div>
+  );
+};

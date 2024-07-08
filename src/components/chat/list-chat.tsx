@@ -16,7 +16,7 @@ const fetchChat = async (roomId: string) => {
 
 const ChatList = () => {
   const [content, setContent] = React.useState("");
-  const { roomId, socket } = useChat();
+  const { roomId, socket, isOpen } = useChat();
   const { data, isLoading, isError, refetch } = useQuery(
     ["message", roomId],
     () => fetchChat(roomId),
@@ -45,13 +45,19 @@ const ChatList = () => {
   if (isError) return <div>Error fetching messages</div>;
 
   return (
-    <div className="flex-1 flex flex-col w-full p-6 relative bg-gray-900 rounded-3xl mx-6">
+    <div
+      className={cn(
+        "flex-1 flex flex-col w-full p-6 relative bg-gray-900 rounded-3xl mx-6"
+      )}
+    >
       {data.length === 0 && (
         <div className="flex items-center justify-center absolute top-[40%] left-[45%]">
           <p className="text-white">No messages yet</p>
         </div>
       )}
-      <ScrollArea className="w-full h-[75vh]  mb-4">
+      <ScrollArea
+        className={cn("w-full h-[75vh]  mb-4", !isOpen ? "w-full" : "hidden")}
+      >
         <div className="w-full">
           {data &&
             data?.map((message: any, index: number) => (
@@ -90,7 +96,12 @@ const ChatList = () => {
             ))}
         </div>
       </ScrollArea>
-      <div className="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4">
+      <div
+        className={cn(
+          "flex flex-row items-center h-16 rounded-xl bg-white w-full px-4",
+          !isOpen ? "w-full lg:w-auto" : "lg:block hidden"
+        )}
+      >
         <div className="flex-grow ml-4">
           <div className="relative w-full">
             <input
@@ -104,22 +115,6 @@ const ChatList = () => {
               type="text"
               className="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10"
             />
-            <button className="absolute flex items-center justify-center h-full w-12 right-0 top-0 text-gray-400 hover:text-gray-600">
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            </button>
           </div>
         </div>
         <div className="ml-4">

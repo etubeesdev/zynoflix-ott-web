@@ -64,7 +64,7 @@ const VideoComment = ({ videoId }: any) => {
   };
 
   return (
-    <div className="flex-[0.7]">
+    <div className="lg:flex-[0.7] flex-1 w-full">
       <div className="">
         <section className="bg-gray-900 rounded-3xl py-8 lg:py-16 antialiased">
           <div className="max-w-2xl mx-auto px-4">

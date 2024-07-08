@@ -10,12 +10,6 @@ import {
   defaultLayoutIcons,
 } from "@vidstack/react/player/layouts/default";
 import { Ivideo } from "../types/video";
-import axios from "@/lib/axios";
-import { useQuery } from "react-query";
-import { useRouter } from "next/navigation";
-import { userId } from "@/lib/user";
-import Loading from "../ui/loading";
-
 export const textTracks = [
   // Subtitles
   {
@@ -53,9 +47,9 @@ const VideoPlayer = ({
   const videoLink = isMembership ? video?.original_video : video?.preview_video;
 
   return (
-    <div className="">
+    <div className="pt-24">
       <MediaPlayer
-        className="!h-[650px] aspect-video w-full"
+        className="lg:!h-[650px] h-[200px] aspect-video w-full"
         autoPlay
         src={videoLink}
         viewType="video"

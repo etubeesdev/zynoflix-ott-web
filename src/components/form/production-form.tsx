@@ -92,9 +92,16 @@ const ProductionForm: React.FC = () => {
         localStorage.setItem("userId", response.data.user._id);
         toast.success("Company created successfully");
         router.push("/");
-      } else {
-        toast.error("Error creating company");
       }
+      toast.error("Error creating company");
+      // if (response.data.message === "User created") {
+      //   localStorage.setItem("accessToken", response.data.accessToken);
+      //   localStorage.setItem("userId", response.data.user._id);
+      //   toast.success("Company created successfully");
+      //   router.push("/");
+      // } else {
+      //   toast.error("Error creating company");
+      // }
 
       setFormData({
         name: "",
@@ -124,9 +131,10 @@ const ProductionForm: React.FC = () => {
           type="text"
           id="name"
           name="name"
+          placeholder="Enter Company Name"
           value={formData.name}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 text-black rounded-xl focus:outline-none focus:border-blue-500"
+          className="w-full px-3 py-2 border border-gray-300  bg-transparent rounded-xl focus:outline-none focus:border-blue-500"
         />
         {errors.name && <p className="text-red-500">{errors.name}</p>}
       </div>
@@ -137,10 +145,11 @@ const ProductionForm: React.FC = () => {
         <input
           type="text"
           id="founderName"
+          placeholder="Enter Founder Name"
           name="founderName"
           value={formData.founderName}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded-xl text-black focus:outline-none focus:border-blue-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-xl  bg-transparent  focus:outline-none focus:border-blue-500"
         />
       </div>
       <div className="mb-4">
@@ -148,12 +157,13 @@ const ProductionForm: React.FC = () => {
           Few Words About Your Company:
         </label>
         <textarea
+          placeholder="Enter a few words about your company"
           rows={6}
           id="about"
           name="about"
           value={formData.about}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded-xl text-black focus:outline-none focus:border-blue-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-xl  bg-transparent  focus:outline-none focus:border-blue-500"
         />
       </div>
       <div className="mb-4">
@@ -162,11 +172,12 @@ const ProductionForm: React.FC = () => {
         </label>
         <input
           type="email"
+          placeholder="Enter Email ID"
           id="email"
           name="email"
           value={formData.email}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded-xl text-black focus:outline-none focus:border-blue-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-xl  bg-transparent  focus:outline-none focus:border-blue-500"
         />
         {errors.email && <p className="text-red-500">{errors.email}</p>}
       </div>
@@ -179,8 +190,9 @@ const ProductionForm: React.FC = () => {
           id="contactNumber"
           name="contactNumber"
           value={formData.contactNumber}
+          placeholder="Enter Contact Number"
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded-xl text-black focus:outline-none focus:border-blue-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-xl  bg-transparent  focus:outline-none focus:border-blue-500"
         />
       </div>
       <div className="mb-4">
@@ -188,12 +200,13 @@ const ProductionForm: React.FC = () => {
           Password:
         </label>
         <input
+          placeholder="Enter Password"
           type="password"
           id="password"
           name="password"
           value={formData.password}
           onChange={handleChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded-xl text-black focus:outline-none focus:border-blue-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-xl  bg-transparent  focus:outline-none focus:border-blue-500"
         />
       </div>
       <div className="mb-4">
@@ -202,10 +215,11 @@ const ProductionForm: React.FC = () => {
         </label>
         <input
           type="file"
+          placeholder="Upload Logo"
           id="logo"
           name="logo"
           onChange={handleFileChange}
-          className="w-full px-3 py-2 border border-gray-300 rounded-xl  text-black focus:outline-none focus:border-blue-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-xl   bg-transparent  focus:outline-none focus:border-blue-500"
         />
         {formData.logo && (
           <div className="flex items-center justify-center">

@@ -33,7 +33,7 @@ export function BannerCarousel() {
   if (error) return "An error has occurred: ";
 
   return (
-    <Carousel className="h-[650px] w-full">
+    <Carousel className="lg:h-[650px] h-[550px] w-full">
       <CarouselContent>
         {data.video.map((video: Ivideo, index: number) => (
           <CarouselItem key={index} className="">
@@ -46,7 +46,7 @@ export function BannerCarousel() {
                 muted
                 poster={PathLink(video.processedImages.medium.path)}
                 width="320"
-                className="w-full h-[650px] aspect-auto object-cover"
+                className="w-full lg:h-[650px] h-[550px] aspect-auto object-cover"
                 height="240"
                 controls={false}
               >
@@ -54,23 +54,27 @@ export function BannerCarousel() {
                 Your browser does not support the video tag.
               </video>
               <div className="video-overlay"></div>
-              <div className="absolute  top-[45%] left-12 right-0">
+              <div className="absolute top-[50%] lg:top-[45%] left-12 right-0">
                 <div className="">
-                  <div className="w-1/2">
+                  <div className="lg:w-1/2 w-[80%]">
                     <div className="text-white">
-                      <h2 className="text-4xl title line-clamp-3 font-bold">
+                      <h2 className="lg:text-4xl text-base title line-clamp-3 font-bold">
                         {video.title}
                       </h2>
 
                       <div className="gap-2 capitalize text-base text-white flex items-center py-4">
                         <div className="border-2 border-cut bg-green-500 px-4 py-4 border-green-500 w-max rounded-t-xl">
-                          <span className="font-extrabold text-xl">
+                          <span className="font-extrabold text-xs lg:text-xl">
                             {video.certification}
                           </span>
                         </div>
-                        <span className="pl-2">{video.language}</span>
+                        <span className="pl-2 lg:text-base text-sm">
+                          {video.language}
+                        </span>
                         <span>|</span>
-                        <span className="">{video.category}</span>
+                        <span className="lg:text-base text-sm">
+                          {video.category}
+                        </span>
                       </div>
                       {/* <p className="text-base text-white">
                         {video.description}
@@ -78,7 +82,7 @@ export function BannerCarousel() {
 
                       <Link
                         href={`/video/${video._id}`}
-                        className="bg-green-500 w-max font-bold text-white flex items-center gap-2 rounded-xl px-6 py-3 mt-6"
+                        className="bg-green-500 w-max font-bold text-white flex items-center gap-2 rounded-xl lg:px-6 px-4 py-2 lg:py-3 mt-6"
                       >
                         <PlaySVG />
                         PLAY

@@ -21,7 +21,7 @@ function VideoCarousel({
   if (!data) return <p>No data</p>;
 
   return (
-    <Carousel className={cn(className, "")}>
+    <Carousel className={cn(className, "w-full max-w-[91vw] lg:max-w-[94vw]")}>
       <CarouselContent className="">
         {Array.isArray(data) &&
           data?.map((video: Ivideo, index: number) => (

@@ -66,7 +66,7 @@ const Page = () => {
     router.push("/login");
   };
   return (
-    <main>
+    <main className="px-8">
       {isProduction === "production" ? (
         <div className="">
           <ProductionProfile />

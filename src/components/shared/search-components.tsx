@@ -41,7 +41,7 @@ const SearchComponnets = () => {
   }
 
   return (
-    <div ref={wrapperRef} className="py-4 h-20 w-60 ">
+    <div ref={wrapperRef} className="py-4 lg:block hidden h-20 w-60 ">
       <input
         onFocus={() => {
           fetchSearch({

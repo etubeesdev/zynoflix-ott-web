@@ -4,20 +4,23 @@ import io from "socket.io-client";
 
 type ChatContextType = {
   roomId: any;
-
+  setIsOpen: any;
+  isOpen: any;
   socket: any;
 };
 
 const initialContext: ChatContextType = {
   roomId: null,
   socket: null,
+  isOpen: false,
+  setIsOpen: () => {},
 };
 
 const ChatContext = createContext<ChatContextType>(initialContext);
 
 const ChatProvider = ({ children, roomId }: any) => {
   const authId = userId;
-
+  const [isOpen, setIsOpen] = React.useState(false);
   const [socket, setSocket] = useState<any>(null);
 
   useEffect(() => {
@@ -42,6 +45,8 @@ const ChatProvider = ({ children, roomId }: any) => {
       value={{
         socket,
         roomId,
+        isOpen,
+        setIsOpen,
       }}
     >
       {children}

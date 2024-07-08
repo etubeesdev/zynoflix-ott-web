@@ -6,6 +6,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import NotificationBell from "../shared/notification";
 import SearchComponnets from "../shared/search-components";
+import { SheetMobile } from "./mobile-drawer";
 
 const Header = () => {
   const [loggedIn, setLoggedIn] = useState<boolean | null>(null);
@@ -27,12 +28,15 @@ const Header = () => {
               width={134}
               height={54}
               src="/logo/logo.png"
-              className="mr-3 w-full h-20"
+              className="mr-3 w-full h-14 lg:h-20"
               alt="Flowbite Logo"
             />
           </Link>
+          <div className="py-4 ">
+            <SheetMobile />
+          </div>
           {!isLogin && <SearchComponnets />}
-          <div className="flex items-center lg:order-2">
+          <div className=" items-center lg:flex hidden lg:order-2">
             {!loggedIn ? (
               <Link
                 href="/profile"

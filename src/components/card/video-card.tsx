@@ -72,13 +72,15 @@ const VideoCard = ({ video, index, hiddenNew }: any) => {
       : "Unknown";
   return (
     <div
+      className="relative w-[180px] lg:w-[219px] h-full "
+      key={index}
       onMouseEnter={() => setHoveredIndex(index)}
       onMouseLeave={() => setHoveredIndex(null)}
     >
       <div className="h-auto">
         <button
           onClick={() => handletoWatch(video._id)}
-          className="absolute top-4 z-50 right-4"
+          className="absolute top-2 lg:top-4 z-50 right-2 lg:right-4"
         >
           <Heart
             className="text-red-500"
@@ -97,10 +99,12 @@ const VideoCard = ({ video, index, hiddenNew }: any) => {
           />
         </button>
         {!hiddenNew && (
-          <div className="absolute top-4 z-50 left-6">
-            <div className="border-cut shadow-2xl flex items-center flex-col rounded-t-md bg-green-500 px-2 py-3">
-              <span className="text-black text-sm font-bold">NEW</span>
-              <span className="text-black text-xs font-extrabold">
+          <div className="absolute top-2 lg:top-4 z-50 left-2 lg:left-6">
+            <div className="border-cut shadow-2xl flex items-center flex-col rounded-t-md bg-green-500 px-1 lg:px-2 py-2 lg:py-3">
+              <span className="text-black text-xs lg:text-sm font-bold">
+                NEW
+              </span>
+              <span className="text-black text-[10px] lg:text-xs font-extrabold">
                 {video.certification}
               </span>
             </div>
@@ -137,7 +141,7 @@ const VideoCard = ({ video, index, hiddenNew }: any) => {
                 <div className="px-2">
                   <div className="flex items-center">
                     <div className="bg-red-500 w-8 rounded-3xl h-1 rotate-90"></div>
-                    <h5 className="text-xs font-bold uppercase">
+                    <h5 className="lg:text-xs text-[10px] font-bold uppercase">
                       {video.category}
                     </h5>
                   </div>
@@ -152,19 +156,21 @@ const VideoCard = ({ video, index, hiddenNew }: any) => {
           <div className="">
             <div className="flex items-center mt-2 gap-4">
               <img
-                className="w-10 h-10 rounded-full"
+                className="lg:w-10 lg:h-10 h-7 w-7 rounded-full"
                 src={video?.user?.profilePic}
                 alt={video?.user?.full_name}
               />
               <div className="font-medium dark:text-white">
-                <div>{video?.user?.full_name}</div>
+                <div className="lg:text-sm line-clamp-1 text-xs ">
+                  {video?.user?.full_name}
+                </div>
                 <div className="text-sm text-gray-500 dark:text-gray-400">
                   {video.followerCount} followers
                 </div>
               </div>
             </div>
 
-            <div className="text-white capitalize gap-2 pt-2 flex flex-wrap text-xs font-bold">
+            <div className="text-white capitalize gap-1 lg:gap-2 pt-2 flex flex-wrap text-[10px] lg:text-xs font-bold">
               <span>{language}</span> <span>|</span>{" "}
               <span>
                 {convertMinutesToReadableFormat(video?.duration, true)}
