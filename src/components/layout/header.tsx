@@ -32,9 +32,7 @@ const Header = () => {
               alt="Flowbite Logo"
             />
           </Link>
-          <div className="py-4 ">
-            <SheetMobile />
-          </div>
+          <div className="py-4 ">{/* <SheetMobile /> */}</div>
           {!isLogin && <SearchComponnets />}
           <div className=" items-center lg:flex hidden lg:order-2">
             {!loggedIn ? (

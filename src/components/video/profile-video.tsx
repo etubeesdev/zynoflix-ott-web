@@ -348,10 +348,10 @@ const Description: React.FC<DescriptionProps> = ({ text, maxLength }) => {
     setIsExpanded(!isExpanded);
   };
 
-  const shouldShowButton = text.length > maxLength;
+  const shouldShowButton = text?.length > maxLength;
   const displayText = isExpanded
     ? text
-    : text.substring(0, maxLength) + (shouldShowButton ? "..." : "");
+    : text?.substring(0, maxLength) + (shouldShowButton ? "..." : "");
 
   return (
     <div className="text-base py-2 w-[90%] text-gray-300 lg:w-3/4 font-normal text-subtext">
