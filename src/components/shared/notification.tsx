@@ -45,8 +45,6 @@ const NotificationBell = () => {
   };
   const notifications = mapNotificationData(notificatinData);
 
-  console.log(notifications, "notifications");
-
   return (
     <Popover>
       <PopoverTrigger>
