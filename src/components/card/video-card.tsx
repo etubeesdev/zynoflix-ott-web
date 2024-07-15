@@ -99,8 +99,8 @@ const VideoCard = ({ video, index, hiddenNew }: any) => {
           />
         </button>
         {!hiddenNew && (
-          <div className="absolute top-2 lg:top-4 z-50 left-2 lg:left-6">
-            <div className="border-cut shadow-2xl flex items-center flex-col rounded-t-md bg-green-500 px-1 lg:px-2 py-2 lg:py-3">
+          <div className="absolute top-2 lg:top-2 z-50 left-2 lg:left-2">
+            <div className="border-cut shadow-2xl flex items-center flex-col rounded-t-md bg-[#00ffff] px-1  lg:px-2 py-2 lg:py-3">
               <span className="text-black text-xs lg:text-sm font-bold">
                 NEW
               </span>
@@ -145,7 +145,7 @@ const VideoCard = ({ video, index, hiddenNew }: any) => {
                       {video.category}
                     </h5>
                   </div>
-                  <h1 className="line-clamp-2 text-sm mt-3 font-bold">
+                  <h1 className="line-clamp-1 text-sm mt-3 font-bold">
                     {video.title}
                   </h1>
                 </div>

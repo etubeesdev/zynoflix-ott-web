@@ -28,6 +28,7 @@ import axios from "@/lib/axios";
 import MultiSelect from "@/components/ui/multi-select";
 import { formdata } from "@/constants/service-provider-form-data";
 import { userId } from "@/lib/user";
+import { useRouter } from "next/navigation";
 const getAudioVideoDuration = async (file: File) => {
   return new Promise((resolve, reject) => {
     const media = document.createElement("video");
@@ -90,12 +91,12 @@ const dynamicFormSchema = z.object(
 );
 
 const formDesign =
-  "w-full bg-gray-800 border border-gray-500 rounded-2xl outline-none px-4 py-6 text-base";
+  "w-full bg-body rounded-2xl outline-none px-4 py-6 text-base";
 const formLabelClassName = "text-xl font-bold";
 
 const CreateFormSubmit = ({ status, openPayModal, isSuccessful }: any) => {
   console.log(isSuccessful, "isSuccessful");
-
+  const router = useRouter();
   const [thumbnail, setThumbnail] = useState<any>("");
   const [previewVideo, setPreviewVideo] = useState<any>("");
   const [originalVideo, setOriginalVideo] = useState<any>("");
@@ -145,13 +146,14 @@ const CreateFormSubmit = ({ status, openPayModal, isSuccessful }: any) => {
 
       if (response1.status === 201) {
         toast.success("Banner video added successfully");
+        setIsLoading(false);
+        router.push("/");
+        // const transaction = localStorage.getItem("transactionId");
+        // const response1 = await axios.put(`/payment/video/${transaction}`, {
+        //   status: "success",
+        //   isVideo_uploaded: true,
+        // });
 
-        // router.push("/dashboard/banner");
-        const transaction = localStorage.getItem("transactionId");
-        const response1 = await axios.put(`/payment/video/${transaction}`, {
-          status: "success",
-          isVideo_uploaded: true,
-        });
         console.log(response1);
       } else {
         toast.error("Banner video added failed please try again");
@@ -307,6 +309,40 @@ const CreateFormSubmit = ({ status, openPayModal, isSuccessful }: any) => {
                                           "working",
                                           e.target.files[0]
                                         );
+                                        const MAX_FILE_SIZE = 1000000000; // 1GB
+                                        const source = e.target.files[0];
+                                        const fileSize = source.size;
+                                        const fileType = source.type;
+
+                                        // Check file size
+                                        if (fileSize > MAX_FILE_SIZE) {
+                                          toast.error(
+                                            "File size exceeds 1GB limit"
+                                          );
+                                          return;
+                                        }
+
+                                        // Check file type
+                                        const validImageTypes = [
+                                          "image/jpeg",
+                                          "image/png",
+                                          "image/gif",
+                                        ];
+                                        const validVideoTypes = [
+                                          "video/mp4",
+                                          "video/mpeg",
+                                          "video/quicktime",
+                                        ];
+
+                                        if (
+                                          !validImageTypes.includes(fileType) &&
+                                          !validVideoTypes.includes(fileType)
+                                        ) {
+                                          toast.error(
+                                            "Invalid file type. Please upload an image or video."
+                                          );
+                                          return;
+                                        }
 
                                         function convertHMS(props: {
                                           value: string;

@@ -135,7 +135,7 @@ const ProfileVideo = ({
             className={cn(
               "border-2 border-green-500 flex-shrink-0  lg:flex duration-300 justify-center gap-2 py-2 px-4 text-xs lg:text-base items-center rounded-full lg:rounded-xl  z-50 relative  font-semibold capitalize",
               follower?.[0]?.user_id.includes(authId)
-                ? " bg-green-500 text-white"
+                ? " bg-green-500 text-black"
                 : "bg-transparent "
             )}
           >
@@ -147,7 +147,7 @@ const ProfileVideo = ({
             onClick={handletoLike}
             className={cn(
               "  text-white  duration-100 border-2 border-green-500 text-lg flex items-center bg-transparent px-3 lg:px-6 py-2 rounded-xl gap-2",
-              isLike && "bg-green-500"
+              isLike && "bg-green-500 text-black"
             )}
           >
             <svg
@@ -287,7 +287,7 @@ export function DialogDShare() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="hover:bg-green-500 border-2 border-green-500 text-white duration-100 text-lg flex items-center px-3 lg:px-6 py-2 rounded-xl gap-2 bg-background_item">
+        <button className="hover:bg-green-500 hover:text-black duration-300 border-2 border-green-500 text-white duration-100 text-lg flex items-center px-3 lg:px-6 py-2 rounded-xl gap-2 bg-background_item">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

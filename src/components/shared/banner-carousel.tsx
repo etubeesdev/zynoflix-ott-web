@@ -62,17 +62,17 @@ export function BannerCarousel() {
                         {video.title}
                       </h2>
 
-                      <div className="gap-2 capitalize text-base text-white flex items-center py-4">
-                        <div className="border-2 border-cut bg-green-500 px-4 py-4 border-green-500 w-max rounded-t-xl">
+                      <div className="gap-2 capitalize text-base text-black flex items-center py-4">
+                        <div className="border-2 border-cut bg-[#00ffff] px-4 py-4 border-[#00ffff] w-max rounded-t-xl">
                           <span className="font-extrabold text-xs lg:text-xl">
                             {video.certification}
                           </span>
                         </div>
-                        <span className="pl-2 lg:text-base text-sm">
+                        <span className="pl-2 text-white lg:text-base text-sm">
                           {video.language}
                         </span>
                         <span>|</span>
-                        <span className="lg:text-base text-sm">
+                        <span className="lg:text-base text-white text-sm">
                           {video.category}
                         </span>
                       </div>
@@ -82,7 +82,7 @@ export function BannerCarousel() {
 
                       <Link
                         href={`/video/${video._id}`}
-                        className="bg-green-500 w-max font-bold text-white flex items-center gap-2 rounded-xl lg:px-6 px-4 py-2 lg:py-3 mt-6"
+                        className="bg-[#00ffff] w-max font-bold text-black flex items-center gap-2 rounded-xl lg:px-6 px-4 py-2 lg:py-3 mt-6"
                       >
                         <PlaySVG />
                         PLAY
@@ -119,7 +119,7 @@ export function PlaySVG() {
       <g id="SVGRepo_iconCarrier">
         <path
           d="M21.4086 9.35258C23.5305 10.5065 23.5305 13.4935 21.4086 14.6474L8.59662 21.6145C6.53435 22.736 4 21.2763 4 18.9671L4 5.0329C4 2.72368 6.53435 1.26402 8.59661 2.38548L21.4086 9.35258Z"
-          fill="#fff"
+          fill="#000"
         ></path>{" "}
       </g>
     </svg>

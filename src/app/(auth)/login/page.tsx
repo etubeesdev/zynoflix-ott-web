@@ -4,8 +4,8 @@ import React from "react";
 const page = () => {
   return (
     <div>
-      <div className="min-h-screen bg-black text-gray-900 flex justify-center relative">
-        <video
+      <div className="min-h-screen text-gray-900 flex justify-center relative">
+        {/* <video
           loop
           className="absolute z-20 inset-0 w-full h-full object-cover object-center bg-black opacity-70"
           autoPlay
@@ -15,8 +15,9 @@ const page = () => {
         >
           <source src="/bg/bg-login.mp4" type="video/mp4" />
           Your browser does not support the video tag.
-        </video>
-        <div className="max-w-screen-xl z-50 m-0 sm:m-10 rounded-3xl flex justify-center flex-1 ">
+        </video> */}
+        <div className="hero-bg-gradient "></div>
+        <div className="max-w-screen-xl   z-50 m-0 sm:m-10 rounded-3xl flex justify-center flex-1 ">
           <div className="lg:w-1/2 xl:w-5/12 p-6  rounded-3xl sm:p-12">
             <div className="mt-12 flex flex-col items-center">
               <h1 className="text-2xl xl:text-3xl font-extrabold text-white">
@@ -73,7 +74,7 @@ const page = () => {
                     </a>
                   </p>
                 </div>
-                <div className="flex mt-3 text-sm justify-center text-gray-100 text-center items-center">
+                <div className="flex mt-3 text-sm justify-center text-white text-center items-center">
                   <span>create new Account </span>
                   <a href="/signup" className="text-indigo-400 ml-2">
                     Signup

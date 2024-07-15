@@ -17,7 +17,15 @@ const config = {
         "2xl": "1400px",
       },
     },
+    // colors: {
+    //   green: {
+    //     500: "#00ffff",
+    //   },
+    // },
     extend: {
+      colors: {
+        "green-500": "#00ffff",
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },

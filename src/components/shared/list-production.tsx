@@ -5,6 +5,7 @@ import { useQuery } from "react-query";
 import {
   Carousel,
   CarouselContent,
+  CarouselItem,
   CarouselNext,
   CarouselPrevious,
 } from "../ui/carousel";
@@ -75,40 +76,43 @@ const ListProduction: React.FC = () => {
         Production Companies
       </h1>
       <div className="w-full">
-        <Carousel className="w-full max-w-[91vw] lg:max-w-[94vw]">
-          <CarouselContent className="z-10  gap-6">
+        <Carousel className="w-full max-w-[91vw]  basis-auto lg:max-w-[94vw]">
+          <CarouselContent className="z-10 gap-6">
             {productionCompanies &&
               productionCompanies?.map((company) => (
-                <Link
-                  href={"/production/" + company._id}
+                <CarouselItem
+                  className=" bg-[#0f101e] border-[#ffffff1f] px-8 py-4 border rounded-3xl basis-auto"
                   key={company._id}
-                  className="bg-[#0f101e] border-[#ffffff1f] px-16 py-5 border rounded-3xl"
                 >
-                  <div className="flex items-center gap-8 ">
-                    <div className=" relative z-20">
-                      <div className="bg-green-500 w-4 h-4 rounded-full z-50 absolute top-2 right-6" />
-                      <Image
-                        width={220}
-                        height={220}
-                        src={company.logo}
-                        className="hover:scale-105 transition-transform lg:w-32 w-24 h-24 lg:h-32 rounded-full object-cover object-center duration-300 ease-in-out"
-                        alt={`${company.name} Logo`}
-                      />
+                  <Link href={"/production/" + company._id} className="">
+                    <div className="flex items-center gap-8 ">
+                      <div className=" relative w-full z-20">
+                        <div className="bg-green-500 w-4 h-4 rounded-full z-50 absolute top-2 right-6" />
+                        <Image
+                          width={220}
+                          height={220}
+                          src={company.logo}
+                          className="hover:scale-105 transition-transform lg:w-32 w-24 h-24 lg:h-32 rounded-full object-cover object-center duration-300 ease-in-out"
+                          alt={`${company.name} Logo`}
+                        />
+                      </div>
+                      <div className="">
+                        <h2 className="lg:text-3xl text-lg pl-2 font-bold mb-2">
+                          {company.name}
+                        </h2>
+                        <p className="text-[#92939e] lg:text-base text-xs  pl-2 mb-2">
+                          Founder & CEO
+                        </p>
+                        <SocialButtons
+                          facebook={company?.socialMedia?.facebook}
+                          twitter={company?.socialMedia?.twitter}
+                          instagram={company?.socialMedia?.instagram}
+                          youtube={company?.socialMedia?.youtube}
+                        />
+                      </div>
                     </div>
-                    <div className="">
-                      <h2 className="text-3xl pl-2 font-bold mb-2">
-                        {company.name}
-                      </h2>
-                      <p className="text-[#92939e] pl-2 mb-2">Founder & CEO</p>
-                      <SocialButtons
-                        facebook={company?.socialMedia?.facebook}
-                        twitter={company?.socialMedia?.twitter}
-                        instagram={company?.socialMedia?.instagram}
-                        youtube={company?.socialMedia?.youtube}
-                      />
-                    </div>
-                  </div>
-                </Link>
+                  </Link>
+                </CarouselItem>
               ))}
           </CarouselContent>
           <CarouselPrevious className="ml-12 text-black" />
@@ -208,7 +212,7 @@ export const SocialButtons = ({
           key={link.name}
           href={link.url}
           target="_blank"
-          className="border bg-white text-blue-500 p-2 rounded-full"
+          className="border bg-white text-blue-500 p-1 lg:p-2 rounded-full"
         >
           {link.icon}
         </a>
