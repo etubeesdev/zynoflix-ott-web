@@ -82,28 +82,28 @@
     ]
   },
   "app/(default)/chat/[slug]/page.tsx -> @/components/chat/list-chat": {
-    "id": 1135,
+    "id": 4634,
     "files": [
-      "static/chunks/aaea2bcf-4aa5fe77b0b8bb41.js",
-      "static/chunks/8472-b949230f63f9c44e.js",
-      "static/chunks/744-b2029571765cf3a5.js",
+      "static/chunks/aaea2bcf-74f7cd992dfda7a6.js",
+      "static/chunks/8472-54d746b8e46db397.js",
+      "static/chunks/744-f6d35169a17ff4a8.js",
       "static/chunks/6648-229b8673985cf0ab.js",
       "static/chunks/9555-3993c1c1c8444076.js",
       "static/chunks/4868-b619b1d1c0b9e05b.js",
       "static/chunks/3663-7ecab1b0b3483c9b.js",
-      "static/chunks/9203.67f406be9335b1f8.js"
+      "static/chunks/9203.c61fc957bb76d291.js"
     ]
   },
   "app/(default)/chat/[slug]/page.tsx -> @/components/chat/sidebar": {
     "id": 8479,
     "files": [
-      "static/chunks/aaea2bcf-4aa5fe77b0b8bb41.js",
-      "static/chunks/8472-b949230f63f9c44e.js",
-      "static/chunks/744-b2029571765cf3a5.js",
+      "static/chunks/aaea2bcf-74f7cd992dfda7a6.js",
+      "static/chunks/8472-54d746b8e46db397.js",
+      "static/chunks/744-f6d35169a17ff4a8.js",
       "static/chunks/6648-229b8673985cf0ab.js",
       "static/chunks/9555-3993c1c1c8444076.js",
       "static/chunks/4868-b619b1d1c0b9e05b.js",
-      "static/chunks/231-f8bd70f812cdb8e0.js",
+      "static/chunks/231-db1c34174be47f37.js",
       "static/chunks/5402.c009f7d18f25df01.js"
     ]
   },
@@ -123,7 +123,7 @@
     "id": 4557,
     "files": [
       "static/chunks/6648-229b8673985cf0ab.js",
-      "static/chunks/4557.cd795a2f705003c5.js"
+      "static/chunks/4557.59ef5bb1524ec779.js"
     ]
   },
   "app/(default)/profile/[slug]/page.tsx -> @/components/card/video-card": {
@@ -131,7 +131,7 @@
     "files": [
       "static/chunks/7776-1ab142255ae85fb5.js",
       "static/chunks/6648-229b8673985cf0ab.js",
-      "static/chunks/231-f8bd70f812cdb8e0.js",
+      "static/chunks/231-db1c34174be47f37.js",
       "static/chunks/7309.054d502687dc2c1b.js"
     ]
   },
@@ -140,11 +140,11 @@
     "files": [
       "static/chunks/7776-1ab142255ae85fb5.js",
       "static/chunks/6648-229b8673985cf0ab.js",
-      "static/chunks/231-f8bd70f812cdb8e0.js",
+      "static/chunks/231-db1c34174be47f37.js",
       "static/chunks/9553-41fb392f0457d359.js",
       "static/chunks/3236-24c6560f5fd37088.js",
       "static/chunks/572-76d1b3924ea05046.js",
-      "static/chunks/365.2b062412b4b17dc5.js",
+      "static/chunks/365.6c5d3c89a2d2d9ca.js",
       "static/chunks/3354.439d71f39156c6d5.js"
     ]
   },
@@ -152,7 +152,7 @@
     "id": 7309,
     "files": [
       "static/chunks/6648-229b8673985cf0ab.js",
-      "static/chunks/231-f8bd70f812cdb8e0.js",
+      "static/chunks/231-db1c34174be47f37.js",
       "static/chunks/6280.2d2696022a5b162d.js"
     ]
   },
@@ -160,9 +160,9 @@
     "id": 365,
     "files": [
       "static/chunks/6648-229b8673985cf0ab.js",
-      "static/chunks/231-f8bd70f812cdb8e0.js",
+      "static/chunks/231-db1c34174be47f37.js",
       "static/chunks/3236-24c6560f5fd37088.js",
-      "static/chunks/365.2b062412b4b17dc5.js"
+      "static/chunks/365.6c5d3c89a2d2d9ca.js"
     ]
   },
   "app/(default)/video/[videoId]/page.tsx -> @/components/video/profile-video": {

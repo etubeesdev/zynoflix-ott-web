@@ -76,12 +76,12 @@ const ListProduction: React.FC = () => {
         Production Companies
       </h1>
       <div className="w-full">
-        <Carousel className="w-full max-w-[91vw]  basis-auto lg:max-w-[94vw]">
+        <Carousel className="w-full max-w-[91vw]  basis-12 lg:max-w-[94vw]">
           <CarouselContent className="z-10 gap-6">
             {productionCompanies &&
               productionCompanies?.map((company) => (
                 <CarouselItem
-                  className=" bg-[#0f101e] border-[#ffffff1f] px-8 py-4 border rounded-3xl basis-auto"
+                  className=" bg-[#0f101e] border-[#ffffff1f] px-2 lg:px-8 py-2 lg:py-4 border rounded-3xl basis-auto"
                   key={company._id}
                 >
                   <Link href={"/production/" + company._id} className="">
