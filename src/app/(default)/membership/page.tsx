@@ -3,6 +3,7 @@ import axios from "@/lib/axios";
 import { ZRPKEY } from "@/lib/config";
 import { isLogin } from "@/lib/user";
 import { useRouter } from "next/navigation";
+import Script from "next/script";
 import React, { useEffect } from "react";
 import { toast } from "sonner";
 
@@ -10,49 +11,6 @@ const Page = () => {
   const [transactionId, setTransactionId] = React.useState<string>("");
   console.log(transactionId, "transactionId");
   const router = useRouter();
-  const options = {
-    key: ZRPKEY,
-    amount: "19900", //  = INR 199
-    name: "Zynoflix OTT Platform",
-    description: "Month Membership",
-    image: "./logo/logo-1.png",
-    order_id: "order_7HtFNLS98dSj8x",
-    handler: async function (response: any) {
-      const isSuccessful = response.razorpay_payment_id;
-      const transaction = localStorage.getItem("transactionId");
-      if (!isSuccessful) {
-        const response1 = await axios.put(`/payment/${transaction}`, {
-          status: "failed",
-        });
-        console.log(response1);
-        toast.error("Payment failed");
-        return;
-      }
-
-      const response1 = await axios.put(`/payment/${transaction}`, {
-        status: "success",
-      });
-
-      if (response1.data.status === "success") {
-        toast.success("Payment successful");
-        router.push("/");
-      }
-
-      console.log(response1);
-    },
-    prefill: {
-      name: "Gaurav",
-      contact: "9999999999",
-      email: "demo@demo.com",
-    },
-    notes: {
-      address: "some address",
-    },
-    theme: {
-      color: "#F37254",
-      hide_topbar: false,
-    },
-  };
 
   const openPayModal = async (options: any) => {
     if (isLogin) {
@@ -65,14 +23,98 @@ const Page = () => {
 
     const response = await axios.post("/payment", options);
 
-    console.log(response.data.order);
-
-    options.order_id = response.data.order.transactionId;
     setTransactionId(response.data.order.transactionId);
     localStorage.setItem("transactionId", response.data.order._id);
+  };
+  const processPayment = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (isLogin) {
+      toast.warning(
+        "You need to login to add comment. Please login to add comment"
+      );
+      router.push("/login");
+      return;
+    }
+    try {
+      const orderId: string = await createOrderId();
+      console.log(orderId);
 
-    var rzp1 = new (window as any).Razorpay(options) as any;
-    await rzp1.open();
+      const options = {
+        key: ZRPKEY,
+        amount: "19900", //  = INR 199
+        name: "Zynoflix OTT Platform",
+        description: "Month Membership",
+        image: "./logo/logo-1.png",
+        order_id: orderId,
+        handler: async function (response: any) {
+          const isSuccessful = response.razorpay_payment_id;
+          const transaction = localStorage.getItem("transactionId");
+          if (!isSuccessful) {
+            const response1 = await axios.put(`/payment/${transaction}`, {
+              status: "failed",
+            });
+            console.log(response1);
+            toast.error("Payment failed");
+            return;
+          }
+
+          const response1 = await axios.put(`/payment/${transaction}`, {
+            status: "success",
+          });
+
+          if (response1.data.status === "success") {
+            toast.success("Payment successful");
+            router.push("/");
+          }
+
+          console.log(response1);
+        },
+        prefill: {
+          name: "Gaurav",
+          contact: "9999999999",
+          email: "demo@demo.com",
+        },
+        notes: {
+          address: "some address",
+        },
+        theme: {
+          color: "#F37254",
+          hide_topbar: false,
+        },
+      };
+      await openPayModal(options);
+      var paymentObject = new (window as any).Razorpay(options) as any;
+      paymentObject.on("payment.failed", function (response: any) {
+        alert(response.error.description);
+      });
+      paymentObject.open();
+    } catch (error) {
+      console.log(error);
+
+      console.log(error);
+    }
+  };
+  const createOrderId = async () => {
+    try {
+      const response = await fetch("/api/order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          amount: parseFloat("23") * 100,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      return data.orderId;
+    } catch (error) {
+      console.error("There was a problem with your fetch operation:", error);
+    }
   };
   useEffect(() => {
     const script = document.createElement("script");
@@ -83,6 +125,10 @@ const Page = () => {
 
   return (
     <main>
+      <Script
+        id="razorpay-checkout-js"
+        src="https://checkout.razorpay.com/v1/checkout.js"
+      />
       <section className="min-h-screen pt-24 h-full">
         <div className="text-white py-6 sm:py-6">
           <div className="mx-auto max-w-7xl px-0 lg:px-8">
@@ -187,7 +233,7 @@ const Page = () => {
                       </span>
                     </p>
                     <button
-                      onClick={() => openPayModal(options)}
+                      onClick={(e) => processPayment(e)}
                       className="px-6 text-white font-semibold rounded-xl py-3 my-4 bg-blue-500 "
                     >
                       Pay Now
