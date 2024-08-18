@@ -26,7 +26,7 @@ const Page = () => {
     setTransactionId(response.data.order.transactionId);
     localStorage.setItem("transactionId", response.data.order._id);
   };
-  const processPayment = async (e: React.FormEvent<HTMLFormElement>) => {
+  const processPayment = async (e: any) => {
     e.preventDefault();
     if (isLogin) {
       toast.warning(
