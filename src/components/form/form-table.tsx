@@ -112,7 +112,7 @@ const CreateFormSubmit = ({ status, openPayModal, isSuccessful }: any) => {
   });
 
   async function onSubmit(values: z.infer<typeof dynamicFormSchema>) {
-    setIsLoading(true);
+    // setIsLoading(true);
     try {
       const formData = new FormData();
       formData.append("title", values.title);
@@ -120,13 +120,23 @@ const CreateFormSubmit = ({ status, openPayModal, isSuccessful }: any) => {
       formData.append("category", values.category);
       formData.append("language", values.language);
       formData.append("duration", totallDuration);
+      const MAX_FILE_SIZE_MB = 10; // Adjust as needed
+      const checkFileSize = (file: File) =>
+        file.size / (1024 * 1024) <= MAX_FILE_SIZE_MB;
+
+      if (thumbnail && checkFileSize(thumbnail))
+        formData.append("thumbnail", thumbnail as File);
+      if (previewVideo && checkFileSize(previewVideo))
+        formData.append("preview_video", previewVideo as File);
+      if (originalVideo && checkFileSize(originalVideo))
+        formData.append("orginal_video", originalVideo as File);
 
       // thumbnail
-      formData.append("thumbnail", thumbnail as File);
-      // preview video
-      formData.append("preview_video", previewVideo as File);
+      // formData.append("thumbnail", thumbnail as File);
+      // // preview video
+      // formData.append("preview_video", previewVideo as File);
+      // formData.append("orginal_video", originalVideo as File);
       formData.append("certification", values.certification);
-      formData.append("orginal_video", originalVideo as File);
       formData.append("is_banner_video", "true");
       formData.append("created_by_id", userId || "");
       formData.append("user", userId || "");
@@ -146,7 +156,7 @@ const CreateFormSubmit = ({ status, openPayModal, isSuccessful }: any) => {
 
       if (response1.status === 201) {
         toast.success("Banner video added successfully");
-        setIsLoading(false);
+        // setIsLoading(false);
         router.push("/");
         // const transaction = localStorage.getItem("transactionId");
         // const response1 = await axios.put(`/payment/video/${transaction}`, {

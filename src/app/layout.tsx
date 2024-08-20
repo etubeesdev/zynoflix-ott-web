@@ -1,4 +1,5 @@
 "use client";
+import React, { useEffect } from "react";
 import Header from "@/components/layout/header";
 import { Toaster } from "sonner";
 import { AuthProvider } from "@/components/provider/AuthProvider";
@@ -11,6 +12,23 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  useEffect(() => {
+    // Disable text selection
+    document.body.style.userSelect = "none";
+
+    // Disable right-click context menu
+    const handleContextMenu = (event: MouseEvent) => {
+      event.preventDefault();
+    };
+    document.addEventListener("contextmenu", handleContextMenu);
+
+    return () => {
+      // Clean up event listener and CSS rule
+      document.body.style.userSelect = "";
+      document.removeEventListener("contextmenu", handleContextMenu);
+    };
+  }, []);
+
   return (
     <html lang="en">
       <Head>
