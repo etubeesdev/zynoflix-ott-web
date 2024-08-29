@@ -1,9 +1,10 @@
 import axios from "@/lib/axios";
 import Image from "next/image";
-import React from "react";
-import { useQuery } from "react-query";
+import React, { useEffect, useState } from "react";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { Ivideo } from "../types/video";
 import { cn } from "@/lib/utils";
+import StarRatings from "react-star-ratings";
 
 const ProfileVideo = ({
   videoId,
@@ -114,33 +115,39 @@ const ProfileVideo = ({
   return (
     <div>
       <div className="">
-        <div className="flex justify-between lg:justify-start border-t border-b py-4 border-gray-600 items-center gap-4">
-          <Link href={`/profile/${userId}`} className="flex items-center gap-3">
-            <Image
-              width={40}
-              height={40}
-              className="w-10 h-10 rounded-full object-cover"
-              src={user?.profilePic}
-              alt=""
-            />
-            <div className="font-medium dark:text-white">
-              <div>{user?.full_name}</div>
-              <div className="text-sm text-gray-500 dark:text-gray-400">
-                {follower?.[0]?.user_id.length} Followers
+        <div className="flex justify-between lg:justify-between border-t border-b py-4 border-gray-600 items-center gap-4">
+          <div className="flex items-center gap-4">
+            <Link
+              href={`/profile/${userId}`}
+              className="flex items-center gap-3"
+            >
+              <Image
+                width={40}
+                height={40}
+                className="w-10 h-10 rounded-full object-cover"
+                src={user?.profilePic}
+                alt=""
+              />
+              <div className="font-medium dark:text-white">
+                <div>{user?.full_name}</div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">
+                  {follower?.[0]?.user_id.length} Followers
+                </div>
               </div>
-            </div>
-          </Link>
-          <button
-            onClick={handletoFollow}
-            className={cn(
-              "border-2 border-green-500 flex-shrink-0  lg:flex duration-300 justify-center gap-2 py-2 px-4 text-xs lg:text-base items-center rounded-full lg:rounded-xl  z-50 relative  font-semibold capitalize",
-              follower?.[0]?.user_id.includes(authId)
-                ? " bg-green-500 text-black"
-                : "bg-transparent "
-            )}
-          >
-            {follower?.[0]?.user_id.includes(authId) ? "Following" : "Follow"}
-          </button>
+            </Link>
+            <button
+              onClick={handletoFollow}
+              className={cn(
+                "border-2 border-green-500 flex-shrink-0  lg:flex duration-300 justify-center gap-2 py-2 px-4 text-xs lg:text-base items-center rounded-full lg:rounded-xl  z-50 relative  font-semibold capitalize",
+                follower?.[0]?.user_id.includes(authId)
+                  ? " bg-green-500 text-black"
+                  : "bg-transparent "
+              )}
+            >
+              {follower?.[0]?.user_id.includes(authId) ? "Following" : "Follow"}
+            </button>
+          </div>
+          <RatingCompo videoId={videoId} />
         </div>
         <div className="mt-6 flex items-center gap-3">
           <button
@@ -185,9 +192,6 @@ const ProfileVideo = ({
               </div>
             </div>
             <Description text={video.description} maxLength={200} />
-            {/* <div className="text-base py-2 w-[90%] text-gray-300 lg:w-3/4 font-normal text-subtext">
-              {video.description}
-            </div> */}
           </div>
           <VideoComment videoId={video._id} />
         </div>
@@ -208,11 +212,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Facebook, LinkedinIcon, Mail, TwitterIcon } from "lucide-react";
+import { Facebook, LinkedinIcon, Mail, Star, TwitterIcon } from "lucide-react";
 import Link from "next/link";
 import VideoComment from "../shared/video-comment";
 import { toast } from "sonner";
-import { authId, isLogin } from "@/lib/user";
+import { authId, isLogin, userId } from "@/lib/user";
 import { useRouter } from "next/navigation";
 import { convertMinutesToReadableFormat } from "@/lib/time";
 
@@ -333,8 +337,6 @@ export function DialogDShare() {
     </Dialog>
   );
 }
-// components/Description.tsx
-import { useState } from "react";
 
 interface DescriptionProps {
   text: string;
@@ -361,6 +363,117 @@ const Description: React.FC<DescriptionProps> = ({ text, maxLength }) => {
           {isExpanded ? "Show Less" : "Show More"}
         </button>
       )}
+    </div>
+  );
+};
+
+// Define the type for the Rating response
+interface RatingData {
+  userId: string;
+  rating: number;
+}
+
+interface RatingCompoProps {
+  videoId: string;
+}
+
+const RatingCompo: React.FC<RatingCompoProps> = ({ videoId }) => {
+  // React Query client instance
+  const queryClient = useQueryClient();
+
+  // Fetch the rating data
+  const {
+    data: ratings,
+    isLoading,
+    refetch,
+  } = useQuery<any>(
+    ["rating", videoId],
+    async () => {
+      const response = await axios.get<any>(`/rating/${videoId}`);
+      return response.data;
+    },
+    {
+      enabled: !!videoId, // Ensure the query is only run when videoId is present
+    }
+  );
+
+  useEffect(() => {
+    if (ratings) {
+      // get a list of user rating
+      const userRating = ratings?.video?.ratings.find(
+        (rating: any) => rating.userId === authId
+      );
+
+      console.log(userRating, "userRating");
+
+      if (userRating) {
+        setRating(userRating.rating);
+      }
+
+      // if (true) {
+      //   setRating(ratings.rating);
+      // }
+    }
+  }, [ratings, authId]);
+  console.log(ratings, "ratings");
+
+  // Set up local state for rating
+  const [rating, setRating] = useState<number>(0);
+
+  // Update local rating state when data is fetched
+
+  // Mutation for posting a new rating
+  const postRating = async (newRating: number) => {
+    return await axios.post(
+      `/rating/${videoId}`,
+      {
+        rating: newRating,
+        userId: authId,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  };
+
+  // React Query mutation
+  const { mutate } = useMutation(postRating, {
+    onSuccess: () => {
+      toast.success("Rating updated successfully");
+      // Invalidate and refetch the rating data
+      queryClient.invalidateQueries(["rating", videoId]);
+      refetch();
+    },
+  });
+
+  // Handle rating change
+  const handleRatingChange = (newRating: number) => {
+    setRating(newRating); // Update local state
+    mutate(newRating); // Post the new rating
+  };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div className="flex items-center gap-2">
+      <StarRatings
+        rating={rating}
+        starRatedColor="yellow"
+        changeRating={handleRatingChange}
+        numberOfStars={5}
+        starDimension="28px"
+        starSpacing="2px"
+        starHoverColor="yellow"
+        starEmptyColor="gray"
+      />
+
+      <button className="px-4 py-2 rounded-3xl bg-gray-800">
+        <span className="text-sm text-gray-100">({ratings?.rating})</span>
+      </button>
     </div>
   );
 };

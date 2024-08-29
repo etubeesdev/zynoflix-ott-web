@@ -120,7 +120,7 @@ const CreateFormSubmit = ({ status, openPayModal, isSuccessful }: any) => {
       formData.append("category", values.category);
       formData.append("language", values.language);
       formData.append("duration", totallDuration);
-      const MAX_FILE_SIZE_MB = 10; // Adjust as needed
+      const MAX_FILE_SIZE_MB = 20000; // Adjust as needed
       const checkFileSize = (file: File) =>
         file.size / (1024 * 1024) <= MAX_FILE_SIZE_MB;
 
