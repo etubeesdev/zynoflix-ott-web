@@ -89,7 +89,7 @@ const Page: React.FC = () => {
                 key={index}
                 type="text"
                 maxLength={1}
-                ref={(el) => (inputRefs.current[index] = el)}
+                ref={(el: any | null) => (inputRefs.current[index] = el)}
                 value={digit}
                 className="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
                 onChange={(e) => handleChange(e, index)}
@@ -113,7 +113,7 @@ const Page: React.FC = () => {
         )}
         <div className="text-sm text-slate-500 mt-4">
           its a one time otp verification , please do not share this otp with
-          anyone if you did not receive the otp please click on try again to get 
+          anyone if you did not receive the otp please click on try again to get
         </div>
       </div>
     </main>

@@ -72,7 +72,7 @@ const VideoCard = ({ video, index, hiddenNew }: any) => {
       : "Unknown";
   return (
     <div
-      className="relative w-[180px] lg:w-[219px] h-full "
+      className="relative w-[180px] hover:scale-100 z-50 lg:w-[219px] h-full "
       key={index}
       onMouseEnter={() => setHoveredIndex(index)}
       onMouseLeave={() => setHoveredIndex(null)}
@@ -98,7 +98,7 @@ const VideoCard = ({ video, index, hiddenNew }: any) => {
             }
           />
         </button>
-        {!hiddenNew && (
+        {/* {!hiddenNew && (
           <div className="absolute top-2 lg:top-2 z-50 left-2 lg:left-2">
             <div className="border-cut shadow-2xl flex items-center flex-col rounded-t-md bg-[#00ffff] px-1  lg:px-2 py-2 lg:py-3">
               <span className="text-black text-xs lg:text-sm font-bold">
@@ -109,7 +109,7 @@ const VideoCard = ({ video, index, hiddenNew }: any) => {
               </span>
             </div>
           </div>
-        )}
+        )} */}
         <Link href={`/video/${video?._id}`} className="">
           <div className={"duration-300"}>
             <div className="relative">
@@ -139,21 +139,21 @@ const VideoCard = ({ video, index, hiddenNew }: any) => {
               <div className="video-overlay !opacity-45"></div>
               <div className={cn("absolute bottom-3 left-0 right-0")}>
                 <div className="px-2">
-                  <div className="flex items-center">
+                  {/* <div className="flex items-center">
                     <div className="bg-red-500 w-8 rounded-3xl h-1 rotate-90"></div>
                     <h5 className="lg:text-xs text-[10px] font-bold uppercase">
                       {video.category}
                     </h5>
-                  </div>
-                  <h1 className="line-clamp-1 text-sm mt-3 font-bold">
+                  </div> */}
+                  {/* <h1 className="line-clamp-1 text-sm mt-3 font-bold">
                     {video.title}
-                  </h1>
+                  </h1> */}
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="">
+          {/* <div className="">
             <div className="flex items-center mt-2 gap-4">
               <img
                 className="lg:w-10 lg:h-10 h-7 w-7 rounded-full"
@@ -180,7 +180,7 @@ const VideoCard = ({ video, index, hiddenNew }: any) => {
                 {timeAgoString(video?.createdAt)}
               </span>
             </div>
-          </div>
+          </div> */}
         </Link>
       </div>
     </div>

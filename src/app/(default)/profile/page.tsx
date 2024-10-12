@@ -139,7 +139,7 @@ const Page = () => {
             </div>
 
             <div className="py-8 px-12">
-              <button className="flex items-center bg-green-500 rounded-xl px-6 py-3 gap-3">
+              <button className="flex items-center bg-green-500 text-black rounded-xl px-6 py-3 gap-3">
                 <VideoIcon className="w-6 h-6" />
                 my Video
               </button>

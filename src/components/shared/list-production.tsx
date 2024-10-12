@@ -86,7 +86,7 @@ const ListProduction: React.FC = () => {
                 >
                   <Link href={"/production/" + company._id} className="">
                     <div className="flex items-center gap-8 ">
-                      <div className=" relative w-full z-20">
+                      <div className=" relative w-max z-20">
                         <div className="bg-red-500 w-4 h-4 rounded-full z-50 absolute top-1 right-5" />
                         <Image
                           width={220}
@@ -103,12 +103,15 @@ const ListProduction: React.FC = () => {
                         <p className="text-[#92939e] lg:text-base text-xs  pl-2 mb-2">
                           Founder & CEO
                         </p>
-                        <SocialButtons
+                        <button className="bg-red-500 px-6 py-3 rounded-xl">
+                          Watching
+                        </button>
+                        {/* <SocialButtons
                           facebook={company?.socialMedia?.facebook}
                           twitter={company?.socialMedia?.twitter}
                           instagram={company?.socialMedia?.instagram}
                           youtube={company?.socialMedia?.youtube}
-                        />
+                        /> */}
                       </div>
                     </div>
                   </Link>

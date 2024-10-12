@@ -4,7 +4,7 @@ import Head from "next/head";
 
 const LegalPolicy: NextPage = () => {
   return (
-    <div className="min-h-screen bg-body flex-col">
+    <div className="min-h-screen bg-body pt-24 flex-col">
       <Head>
         <title>ZynoFlix - Legal Policy</title>
         <meta name="description" content="Legal Policy of ZynoFlix" />

@@ -28,6 +28,19 @@ export const footerData: FooterSection[] = [
       { label: "Terms & Conditions", href: "/legal-policy" },
       { label: "refund policy", href: "/refund-policy" },
       { label: "copy right", href: "/copyrights" },
+      {
+        label: "Legal Policy",
+        href: "/legal-policy",
+      },
+    ],
+  },
+  {
+    title: "OUR SERVICE",
+    links: [
+      { label: "Sell Videos", href: "https://www.zynoflix.com/upload-video" },
+      { label: "Wanted Video", href: "https://www.zynoflix.com/wanted/video" },
+      { label: "Sponsorship", href: "https://www.zynoflix.com/sponsorship" },
+      { label: "Awards", href: "https://www.zynoflix.com/awards" },
     ],
   },
 ];
