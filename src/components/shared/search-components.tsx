@@ -53,7 +53,7 @@ const SearchComponnets = () => {
         onChange={fetchSearch}
         placeholder="Search a video"
         type="text"
-        className="border border-gray-600 text-white outline-none  bg-transparent w-full px-4 py-2 rounded-3xl"
+        className="border border-gray-600 text-white placeholder:text-white outline-none  bg-transparent w-full px-4 py-2 rounded-3xl"
       />
 
       {open && (

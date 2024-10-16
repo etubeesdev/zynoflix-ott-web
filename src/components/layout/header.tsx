@@ -33,8 +33,7 @@ const Header = () => {
             />
           </Link>
           <div className="py-4 block lg:hidden ">
-            {" "}
-            <SheetMobile />{" "}
+            <SheetMobile />
           </div>
           {!isLogin && <SearchComponnets />}
           <div className=" items-center lg:flex hidden lg:order-2">

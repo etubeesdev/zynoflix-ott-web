@@ -66,7 +66,7 @@ export default function Page({ params }: { params: { videoId: string } }) {
       </div>
       <div className="lg:p-6 p-3">
         <div className="w-full mt-4 flex lg:flex-row flex-col pb-3 justify-between items-start lg:items-center">
-          <div className="w-3/4">
+          <div className="lg:w-3/4 w-full">
             <h3 className="lg:text-xl text-lg font-bold">{video.title}</h3>
             <div className="flex w-full gap-4 items-center">
               <p className="lg:text-sm text-xs font-medium text-gray-600">

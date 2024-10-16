@@ -11,6 +11,7 @@ interface ProductionCompanyFormData {
   email: string;
   contactNumber?: string;
   password?: string;
+  profile_type: string;
   logo?: File;
 }
 
@@ -22,15 +23,18 @@ const ProductionForm: React.FC = () => {
     about: "",
     email: "",
     contactNumber: "",
+    profile_type: "production",
     password: "",
     logo: undefined,
   });
+  console.log(formData, "formData");
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  console.log(errors, "errors");
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | any
   ) => {
     const { name, value, type, checked } = e.target as any;
     setFormData({
@@ -53,7 +57,15 @@ const ProductionForm: React.FC = () => {
     if (!formData.name) newErrors.name = "Name is required";
     if (!formData.email) newErrors.email = "Email is required";
     if (!formData.logo) newErrors.logo = "Logo is required";
-    // Add more validation rules as needed
+    if (!formData.password) newErrors.password = "Password is required";
+    if (!formData.contactNumber)
+      newErrors.contactNumber = "Contact Number is required";
+    if (!formData.about) newErrors.about = "About is required";
+    if (!formData.founderName)
+      newErrors.founderName = "Founder Name is required";
+    if (!formData.profile_type)
+      newErrors.profile_type = "Profile Type is required";
+
     return newErrors;
   };
 
@@ -103,6 +115,7 @@ const ProductionForm: React.FC = () => {
         name: "",
         founderName: "",
         about: "",
+        profile_type: "",
         email: "",
         contactNumber: "",
         password: "",
@@ -204,6 +217,22 @@ const ProductionForm: React.FC = () => {
         />
       </div>
       <div className="mb-4">
+        {/* //select optin for profile_type enum like production and directors  */}
+        <label htmlFor="profile_type" className="block mb-2 font-bold">
+          Profile Type:
+        </label>
+        <select
+          id="profile_type"
+          name="profile_type"
+          value={formData.profile_type}
+          onChange={handleChange}
+          className="w-full px-3 py-2 border border-gray-300 rounded-xl  bg-transparent  focus:outline-none focus:border-blue-500"
+        >
+          <option value="production">Production</option>
+          <option value="directors">Directors</option>
+        </select>
+      </div>
+      <div className="mb-4">
         <label htmlFor="logo" className="block mb-2 font-bold">
           Logo:
         </label>
@@ -232,7 +261,7 @@ const ProductionForm: React.FC = () => {
         disabled={isSubmitting}
         className="w-full py-2 px-4 bg-green-500 text-black font-bold rounded-xl hover:bg-green-500"
       >
-        Submit
+        {isSubmitting ? "Submitting..." : "Submit"}
       </button>
     </form>
   );

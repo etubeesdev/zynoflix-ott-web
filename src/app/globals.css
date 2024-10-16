@@ -60,11 +60,11 @@ html {
   z-index: -1;
   background: linear-gradient(
     0.41deg,
-    #df86aa 19.48%,
-    rgba(46, 32, 255, 0.27) -13.62%,
-    #10121d 267.11%
+    #df86aa 5.48%,
+    rgba(46, 32, 255, 0.27) -5.62%,
+    #10121d 67.11%
   );
-  filter: blur(225px);
+  filter: blur(625px);
   top: -1292px;
   width: 100%;
   height: 2191px;

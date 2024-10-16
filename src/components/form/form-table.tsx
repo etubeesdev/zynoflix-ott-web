@@ -95,7 +95,6 @@ const formDesign =
 const formLabelClassName = "text-xl font-bold";
 
 const CreateFormSubmit = ({ status, openPayModal, isSuccessful }: any) => {
-  console.log(isSuccessful, "isSuccessful");
   const router = useRouter();
   const [thumbnail, setThumbnail] = useState<any>("");
   const [previewVideo, setPreviewVideo] = useState<any>("");
@@ -112,7 +111,7 @@ const CreateFormSubmit = ({ status, openPayModal, isSuccessful }: any) => {
   });
 
   async function onSubmit(values: z.infer<typeof dynamicFormSchema>) {
-    // setIsLoading(true);
+    setIsLoading(true);
     try {
       const formData = new FormData();
       formData.append("title", values.title);
@@ -141,6 +140,7 @@ const CreateFormSubmit = ({ status, openPayModal, isSuccessful }: any) => {
       formData.append("created_by_id", userId || "");
       formData.append("user", userId || "");
       formData.append("created_by_name", "admin");
+
       const response1 = await axios.post(`/create_videos`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -156,7 +156,7 @@ const CreateFormSubmit = ({ status, openPayModal, isSuccessful }: any) => {
 
       if (response1.status === 201) {
         toast.success("Banner video added successfully");
-        // setIsLoading(false);
+        setIsLoading(false);
         router.push("/");
         // const transaction = localStorage.getItem("transactionId");
         // const response1 = await axios.put(`/payment/video/${transaction}`, {
@@ -175,30 +175,30 @@ const CreateFormSubmit = ({ status, openPayModal, isSuccessful }: any) => {
     }
   }
 
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <div className="flex flex-col items-center justify-center">
-          <p className="text-3xl font-semibold">Uploading...</p>
-          <div className="relative pt-1 w-80">
-            <div className="flex mb-2 items-center justify-between">
-              <div>
-                <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-indigo-600 bg-indigo-200">
-                  {progressEvent}%
-                </span>
-              </div>
-            </div>
-            <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-indigo-200">
-              <div
-                style={{ width: `${progressEvent}%` }}
-                className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-indigo-500"
-              ></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <div className="flex items-center justify-center h-screen">
+  //       <div className="flex flex-col items-center justify-center">
+  //         <p className="text-3xl font-semibold">Uploading...</p>
+  //         <div className="relative pt-1 w-80">
+  //           <div className="flex mb-2 items-center justify-between">
+  //             <div>
+  //               <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-indigo-600 bg-indigo-200">
+  //                 {progressEvent}%
+  //               </span>
+  //             </div>
+  //           </div>
+  //           <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-indigo-200">
+  //             <div
+  //               style={{ width: `${progressEvent}%` }}
+  //               className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-indigo-500"
+  //             ></div>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div>
@@ -632,7 +632,7 @@ const CreateFormSubmit = ({ status, openPayModal, isSuccessful }: any) => {
                     className="px-6 py-3 rounded-3xl border text-base font-semibold text-white bg-indigo-600 hover:bg-indigo-700"
                     type="submit"
                   >
-                    Upload
+                    {isLoading ? "Uploading..." : "Submit"}
                   </Button>
                 )}
               </div>

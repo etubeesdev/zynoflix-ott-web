@@ -24,7 +24,7 @@ const config = {
     // },
     extend: {
       colors: {
-        "green-500": "#00ffff",
+        "green-500": "#2196F3",
       },
       keyframes: {
         "accordion-down": {

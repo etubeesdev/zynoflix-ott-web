@@ -90,7 +90,8 @@ export default function Home() {
       <div className="w-full">
         <BannerCarousel />
         <section className="lg:px-8 px-4 space-y-12 pt-12 py-2">
-          <ListProduction />
+          <ListProduction url={"production"} />
+          <ListProduction url={"director"} />
           <CategoryList />
           <AdsCard />
         </section>

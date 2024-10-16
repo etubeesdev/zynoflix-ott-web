@@ -115,8 +115,8 @@ const ProfileVideo = ({
   return (
     <div>
       <div className="">
-        <div className="flex justify-between lg:justify-between border-t border-b py-4 border-gray-600 items-center gap-4">
-          <div className="flex items-center gap-4">
+        <div className="flex justify-between lg:flex-row flex-col lg:items-center items-start lg:justify-between border-t border-b py-4 border-gray-600 gap-4">
+          <div className="flex items-center w-full lg:justify-start justify-between gap-4">
             <Link
               href={`/profile/${userId}`}
               className="flex items-center gap-3"
@@ -140,7 +140,7 @@ const ProfileVideo = ({
               className={cn(
                 "border-2 border-green-500 flex-shrink-0  lg:flex duration-300 justify-center gap-2 py-2 px-4 text-xs lg:text-base items-center rounded-full lg:rounded-xl  z-50 relative  font-semibold capitalize",
                 follower?.[0]?.user_id.includes(authId)
-                  ? " bg-green-500 text-black"
+                  ? " bg-green-500 text-white"
                   : "bg-transparent "
               )}
             >
@@ -154,7 +154,7 @@ const ProfileVideo = ({
             onClick={handletoLike}
             className={cn(
               "  text-white  duration-100 border-2 border-green-500 text-lg flex items-center bg-transparent px-3 lg:px-6 py-2 rounded-xl gap-2",
-              isLike && "bg-green-500 text-black"
+              isLike && "bg-green-500 text-white"
             )}
           >
             <svg
@@ -458,21 +458,43 @@ const RatingCompo: React.FC<RatingCompoProps> = ({ videoId }) => {
     return <div>Loading...</div>;
   }
 
+  const numberOfStars = Math.max(
+    0,
+    Math.min(5, Math.floor(ratings?.rating || 0))
+  );
+  // Use numberOfStars safely here, ensuring it's a valid number between 0 and 5
+
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex w-full items-center gap-2">
+      <button className="bg-blue-500 text-white px-4 py-2 rounded-3xl">
+        EARN 50K STAR
+      </button>
       <StarRatings
         rating={rating}
         starRatedColor="yellow"
         changeRating={handleRatingChange}
-        numberOfStars={5}
+        numberOfStars={1}
         starDimension="28px"
         starSpacing="2px"
         starHoverColor="yellow"
         starEmptyColor="gray"
       />
+      <div
+        aria-disabled
+        className="bg-gray-100 px-4 py-2 rounded-3xl cursor-not-allowed"
+      >
+        <StarRatings
+          rating={rating}
+          numberOfStars={numberOfStars || 0}
+          starDimension="28px"
+          starSpacing="2px"
+          starHoverColor="yellow"
+          starEmptyColor="gray"
+        />
+      </div>
 
       <button className="px-4 py-2 rounded-3xl bg-gray-800">
-        <span className="text-sm text-gray-100">({ratings?.rating})</span>
+        <span className="text-sm text-gray-100">({numberOfStars})</span>
       </button>
     </div>
   );

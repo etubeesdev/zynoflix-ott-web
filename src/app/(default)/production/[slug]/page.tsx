@@ -121,7 +121,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 ) : (
                   <button
                     onClick={handletoCreateRoom}
-                    className="bg-green-500 text-black flex items-center gap-3 px-4 py-2 rounded-xl"
+                    className="bg-green-500 text-white flex items-center gap-3 px-4 py-2 rounded-xl"
                   >
                     <MessageCircle className="w-6 h-6" />
                     Chat

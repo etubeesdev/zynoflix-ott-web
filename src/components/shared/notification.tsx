@@ -36,10 +36,10 @@ const NotificationBell = () => {
 
   const mapNotificationData = (notificationData: any[]): any[] => {
     return notificationData?.map((item) => ({
-      name: item.title,
-      description: item.message,
+      name: item?.title,
+      description: item?.message,
       time: timeAgoString(item.createdAt),
-      icon: item.user.profilePic,
+      icon: item?.user?.profilePic,
       color: "#00C9A7",
     }));
   };
