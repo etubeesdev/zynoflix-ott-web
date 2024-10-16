@@ -45,7 +45,7 @@ const Page: React.FC = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:8080/api/auth/tvos/verify",
+        "https://api.zynoflixott.com/api/auth/tvos/verify",
         {
           method: "POST",
           headers: {
