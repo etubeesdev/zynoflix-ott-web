@@ -465,7 +465,7 @@ const RatingCompo: React.FC<RatingCompoProps> = ({ videoId }) => {
   // Use numberOfStars safely here, ensuring it's a valid number between 0 and 5
 
   return (
-    <div className="flex w-full items-center gap-2">
+    <div className="flex w-1/2 items-center gap-2">
       <button className="bg-blue-500 text-white px-4 py-2 rounded-3xl">
         EARN 50K STAR
       </button>
@@ -483,18 +483,41 @@ const RatingCompo: React.FC<RatingCompoProps> = ({ videoId }) => {
         aria-disabled
         className="bg-gray-100 px-4 py-2 rounded-3xl cursor-not-allowed"
       >
-        <StarRatings
-          rating={rating}
-          numberOfStars={numberOfStars || 0}
-          starDimension="28px"
-          starSpacing="2px"
-          starHoverColor="yellow"
-          starEmptyColor="gray"
-        />
+        {numberOfStars > 5 ? (
+          <>
+            {Array.from({ length: 5 }).map((_, index) => (
+              <StarRatings
+                key={index} // Ensure each star has a unique key
+                rating={rating}
+                numberOfStars={1} // Each individual star rating is 1
+                starDimension="28px"
+                starSpacing="2px"
+                starHoverColor="yellow"
+                starEmptyColor="gray"
+              />
+            ))}
+            <span>5+</span> {/* Display the 5+ text */}
+          </>
+        ) : (
+          Array.from({ length: numberOfStars }).map((_, index) => (
+            <StarRatings
+              key={index} // Ensure each star has a unique key
+              rating={rating}
+              numberOfStars={1} // Each individual star rating is 1
+              starDimension="28px"
+              starSpacing="2px"
+              starHoverColor="yellow"
+              starEmptyColor="gray"
+            />
+          ))
+        )}
       </div>
 
       <button className="px-4 py-2 rounded-3xl bg-gray-800">
         <span className="text-sm text-gray-100">({numberOfStars})</span>
+      </button>
+      <button className="bg-gray-100 px-4 py-2 rounded-3xl cursor-not-allowed text-black font-semibold">
+        25,000/-
       </button>
     </div>
   );
