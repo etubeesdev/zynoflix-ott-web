@@ -4,6 +4,7 @@ import { BannerCarousel } from "@/components/shared/banner-carousel";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import { NextSeo } from "next-seo";
+import LanguageList from "@/components/shared/list-language";
 
 const CategoryList = dynamic(
   () => import("@/components/shared/category-list"),
@@ -90,9 +91,13 @@ export default function Home() {
       <div className="w-full">
         <BannerCarousel />
         <section className="lg:px-8 px-4 space-y-12 pt-12 py-2">
-          <ListProduction url={"production"} />
-          <ListProduction url={"director"} />
+          <ListProduction url={"director"} title={"DIRECTORS LIVE"} />
+          <ListProduction
+            url={"production"}
+            title={"PRODUCTION COMPANIES LIVE"}
+          />
           <CategoryList />
+          <LanguageList />
           <AdsCard />
         </section>
       </div>

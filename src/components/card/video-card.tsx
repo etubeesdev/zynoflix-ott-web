@@ -70,6 +70,7 @@ const VideoCard = ({ video, index, hiddenNew }: any) => {
     typeof video?.language[0] === "string"
       ? video.language[0].split(",")[0]
       : "Unknown";
+
   return (
     <div
       className="relative w-[180px] hover:scale-100 z-50 lg:w-[219px] h-full "
@@ -78,7 +79,7 @@ const VideoCard = ({ video, index, hiddenNew }: any) => {
       onMouseLeave={() => setHoveredIndex(null)}
     >
       <div className="h-auto">
-        <button
+        {/* <button
           onClick={() => handletoWatch(video._id)}
           className="absolute top-2 lg:top-4 z-50 right-2 lg:right-4"
         >
@@ -97,7 +98,7 @@ const VideoCard = ({ video, index, hiddenNew }: any) => {
                 : "white"
             }
           />
-        </button>
+        </button> */}
         {/* {!hiddenNew && (
           <div className="absolute top-2 lg:top-2 z-50 left-2 lg:left-2">
             <div className="border-cut shadow-2xl flex items-center flex-col rounded-t-md bg-[#00ffff] px-1  lg:px-2 py-2 lg:py-3">

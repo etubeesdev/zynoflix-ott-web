@@ -21,7 +21,10 @@ const CategoryList = () => {
   return (
     <div className="">
       <div className="">
-        <h2 className="lg:text-3xl text-xl pb-5 font-bold">Categories</h2>
+        <div className="pb-8">
+          <h2 className="lg:text-3xl text-xl font-bold">SHORT FILMS</h2>
+          <p className="text-gray-600 text-sm">BLACK BUSTER</p>
+        </div>
         <VideoCarousel data={data} />
       </div>
     </div>
