@@ -6,6 +6,8 @@ const nextConfig = {
       "i.ytimg.com",
       "i.sstatic.net",
       "via.placeholder.com",
+      "room-booking-infygru.s3.ap-south-1.amazonaws.com",
+      "zynoflix.s3.ap-south-1.amazonaws.com",
     ],
   },
 };

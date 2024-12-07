@@ -131,7 +131,7 @@ const VideoCard = ({ video, index, hiddenNew }: any) => {
               ) : (
                 <Image
                   className={cn("rounded-xl object-cover", videoRatio)}
-                  src={PathLink(video.processedImages.medium.path)}
+                  src={video.thumbnail}
                   alt={video.title}
                   width={310}
                   height={194}
