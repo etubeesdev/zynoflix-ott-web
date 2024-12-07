@@ -1,5 +1,4 @@
 import axios from "@/lib/axios";
-import { PathLink } from "@/lib/generate-aws-link";
 import React, { useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import { ScrollArea } from "../ui/scroll-area";
@@ -70,7 +69,7 @@ const SearchComponnets = () => {
                   <Image
                     width={100}
                     height={70}
-                    src={PathLink(video.processedImages.small.path)}
+                    src={video.processedImages.small.path}
                     alt=""
                     className="w-24 h-14 object-cover rounded-lg"
                   />

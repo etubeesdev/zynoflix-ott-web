@@ -1,6 +1,5 @@
 import axios from "@/lib/axios";
 import { videoRatio } from "@/lib/config";
-import { PathLink } from "@/lib/generate-aws-link";
 import { convertMinutesToReadableFormat, timeAgoString } from "@/lib/time";
 import { isLogin } from "@/lib/user";
 import { cn } from "@/lib/utils";
@@ -121,7 +120,7 @@ const VideoCard = ({ video, index, hiddenNew }: any) => {
                   autoPlay
                   loop
                   muted
-                  poster={PathLink(video.processedImages.medium.path)}
+                  poster={video.thumbnail}
                   className={cn("object-cover rounded-xl ", videoRatio)}
                   controls={false}
                 >

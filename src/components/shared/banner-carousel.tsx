@@ -11,7 +11,6 @@ import axios from "@/lib/axios";
 import { useQuery } from "react-query";
 import Loading from "../ui/loading";
 import { Ivideo } from "../types/video";
-import { PathLink } from "@/lib/generate-aws-link";
 import Link from "next/link";
 
 // Mock API function
@@ -44,7 +43,7 @@ export function BannerCarousel() {
                 autoPlay
                 loop
                 muted
-                poster={PathLink(video.processedImages.medium.path)}
+                poster={video.processedImages.medium.path}
                 width="320"
                 className="w-full lg:h-[650px] h-[550px] aspect-auto object-cover"
                 height="240"
