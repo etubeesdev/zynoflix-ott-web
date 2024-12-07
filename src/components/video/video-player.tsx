@@ -53,18 +53,13 @@ const VideoPlayer = ({
         autoPlay
         src={videoLink}
         viewType="video"
-        streamType="on-demand"
         logLevel="warn"
-        crossOrigin
         playsInline
         title={video?.title}
         poster={video?.processedImages?.medium?.path}
       >
         <MediaProvider>
           <Poster className="vds-poster" />
-          {/* {textTracks.map((track) => (
-            <Track {...track} key={track.src} />
-          ))} */}
         </MediaProvider>
         <DefaultVideoLayout icons={defaultLayoutIcons} />
       </MediaPlayer>

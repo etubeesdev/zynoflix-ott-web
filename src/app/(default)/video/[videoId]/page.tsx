@@ -77,8 +77,10 @@ export default function Page({ params }: { params: { videoId: string } }) {
                 {timeAgoString(new Date(video.createdAt))}
               </p>
               <span>|</span>
-              <h5 className="lg:text-sm text-xs video-content-holder-dot font-medium text-gray-600">
-                {video.category}
+              <h5 className="lg:text-sm line-clamp-1 text-xs video-content-holder-dot font-medium text-gray-600">
+                {typeof video?.category === "string"
+                  ? video.category.split(",")[0]
+                  : ""}
               </h5>
               <span>|</span>
               <div className="lg:text-sm text-xs video-content-holder-dot font-medium text-gray-600">
