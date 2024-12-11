@@ -319,7 +319,6 @@ export default function Page({ params }: { params: { videoId: string } }) {
                   className="px-4 w-full text-start py-6 bg-gray-900 my-5 rounded-3xl"
                 >
                   <h2 className="uppercase text-xl font-semibold">Comment</h2>
-                  
                 </button>
                 {isOpen && (
                   <div className="">
@@ -387,7 +386,7 @@ const getNumberColor = (num: number) => {
   }
 };
 
-export function VotePoll({ numberOfStars, handleRatingChange, rating }: any) {
+function VotePoll({ numberOfStars, handleRatingChange, rating }: any) {
   const [selectedNumber, setSelectedNumber] = useState<number | null>(rating);
   const votes = numberOfStars;
   const [isLocked] = useState(true);
