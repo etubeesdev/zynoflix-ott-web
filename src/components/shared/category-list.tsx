@@ -14,7 +14,7 @@ const fetchCategories = async () => {
   return response.data.videos;
 };
 
-const CategoryList = () => {
+const CategoryList = ({ title, desc }: any) => {
   const { data, isLoading, error } = useQuery("video", fetchCategories);
   if (isLoading) return <p>Loading...</p>;
 
@@ -22,8 +22,8 @@ const CategoryList = () => {
     <div className="">
       <div className="">
         <div className="pb-8">
-          <h2 className="lg:text-3xl text-xl font-bold">SHORT FILMS</h2>
-          <p className="text-gray-600 text-sm">BLACK BUSTER</p>
+          <h2 className="lg:text-3xl text-xl font-bold">{title}</h2>
+          <p className="text-gray-600 text-sm">{desc}</p>
         </div>
         <VideoCarousel data={data} />
       </div>

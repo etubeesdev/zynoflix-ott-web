@@ -3,7 +3,7 @@ import Head from "next/head";
 
 const About: NextPage = () => {
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col">
+    <div className="min-h-screen  flex flex-col">
       <Head>
         <title>About ZynoFlix</title>
         <meta
@@ -12,7 +12,7 @@ const About: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header className="bg-white shadow-md sticky top-0 z-50">
+      <header className=" shadow-md sticky top-0 z-50">
         <nav className="max-w-6xl mx-auto p-4 flex justify-between items-center">
           <a href="/" className="text-2xl font-bold text-blue-600">
             ZynoFlix
@@ -52,7 +52,7 @@ const About: NextPage = () => {
           </ul>
         </nav>
       </header>
-      <main className="flex-grow max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg mt-10">
+      <main className="flex-grow max-w-4xl mx-auto  p-8 rounded-lg shadow-lg mt-10">
         <h1 className="text-3xl font-bold mb-6">Welcome to ZynoFlix</h1>
         <p className="mb-4">
           ZynoFlix is a cutting-edge OTT (Over-The-Top) platform that is
@@ -99,8 +99,8 @@ const About: NextPage = () => {
         </p>
       </main>
       <footer className="bg-white shadow-md mt-10">
-        <div className="max-w-6xl mx-auto p-4 text-center text-gray-600">
-          &copy; 2024 Fuero Networks Technologies Private Limited. All rights
+        <div className="max-w-6xl mx-auto p-4 text-center capitalize text-gray-600">
+          &copy; 2024 INFOPOD MEDIA ENTERTAINMENT PRIVATE LIMITED. All rights
           reserved.
         </div>
       </footer>

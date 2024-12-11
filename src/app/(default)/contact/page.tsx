@@ -143,7 +143,7 @@ const Contact = () => {
               </svg>
               <div className="flex flex-col gap-2">
                 <p className="capitalize">
-                  FUERO NETWORK TECHNOLOGIES PRIVATE LIMITED
+                  INFOPOD MEDIA ENTERTAINMENT PRIVATE LIMITED
                 </p>
                 <p className="normal-case">
                   No. 11/4, Pooja Garden, Kalapatti Main Rd,

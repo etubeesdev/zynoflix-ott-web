@@ -62,7 +62,7 @@ export function BannerCarousel() {
                       </h2>
 
                       <div className="gap-2 capitalize text-base text-black flex items-center py-4">
-                        <div className="border-2 border-cut bg-blue-500 px-4 py-4 text-white border-blue-500 w-max rounded-t-xl">
+                        <div className="border-cut bg-main px-4 py-4 text-white  w-max rounded-t-xl">
                           <span className="font-extrabold text-xs lg:text-xl">
                             {video.certification}
                           </span>
@@ -72,7 +72,7 @@ export function BannerCarousel() {
                         </span>
                         <span>|</span>
                         <span className="lg:text-base text-white text-sm">
-                          {video.category}
+                          {video.category[0].split(",")[0]}
                         </span>
                       </div>
                       {/* <p className="text-base text-white">
@@ -81,7 +81,7 @@ export function BannerCarousel() {
 
                       <Link
                         href={`/video/${video._id}`}
-                        className="bg-blue-500 w-max font-bold text-white flex items-center gap-2 rounded-xl lg:px-6 px-4 py-2 lg:py-3 mt-6"
+                        className="bg-main w-max font-bold text-white flex items-center gap-2 rounded-xl lg:px-6 px-4 py-2 lg:py-3 mt-6"
                       >
                         <PlaySVG />
                         PLAY

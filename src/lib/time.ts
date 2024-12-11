@@ -56,22 +56,12 @@ export function convertMinutesToReadableFormat(
   let result = "";
 
   if (hours > 0) {
-    result += `${hours} hour${hours > 1 ? "s" : ""}`;
-    if (mins > 0 || seconds > 0) {
-      result += " ";
-    }
+    result += `${hours}:`;
   }
 
-  if (mins > 0) {
-    result += `${mins} min${mins > 1 ? "s" : ""}`;
-    if (seconds > 0) {
-      result += " ";
-    }
-  }
-
-  if (seconds > 0 || result === "") {
-    result += `${seconds} second${seconds > 1 ? "s" : ""}`;
-  }
+  result += `${mins < 10 ? "0" : ""}${mins}:${
+    seconds < 10 ? "0" : ""
+  }${seconds}min`;
 
   return result;
 }

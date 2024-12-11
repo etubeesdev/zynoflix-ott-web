@@ -1,9 +1,7 @@
 import axios from "@/lib/axios";
 import { videoRatio } from "@/lib/config";
-import { convertMinutesToReadableFormat, timeAgoString } from "@/lib/time";
 import { isLogin } from "@/lib/user";
 import { cn } from "@/lib/utils";
-import { Heart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -72,7 +70,7 @@ const VideoCard = ({ video, index, hiddenNew }: any) => {
 
   return (
     <div
-      className="relative w-[180px] hover:scale-100 z-50 lg:w-[219px] h-full "
+      className="relative w-full hover:scale-100 z-50  h-full "
       key={index}
       onMouseEnter={() => setHoveredIndex(index)}
       onMouseLeave={() => setHoveredIndex(null)}
@@ -137,19 +135,19 @@ const VideoCard = ({ video, index, hiddenNew }: any) => {
                 />
               )}
               <div className="video-overlay !opacity-45"></div>
-              <div className={cn("absolute bottom-3 left-0 right-0")}>
-                <div className="px-2">
-                  {/* <div className="flex items-center">
+              {/* <div className={cn("absolute bottom-3 left-0 right-0")}> */}
+              {/* <div className="px-2"> */}
+              {/* <div className="flex items-center">
                     <div className="bg-red-500 w-8 rounded-3xl h-1 rotate-90"></div>
                     <h5 className="lg:text-xs text-[10px] font-bold uppercase">
                       {video.category}
                     </h5>
                   </div> */}
-                  {/* <h1 className="line-clamp-1 text-sm mt-3 font-bold">
+              {/* <h1 className="line-clamp-1 text-sm mt-3 font-bold">
                     {video.title}
                   </h1> */}
-                </div>
-              </div>
+              {/* </div> */}
+              {/* </div> */}
             </div>
           </div>
 

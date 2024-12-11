@@ -96,8 +96,11 @@ export default function Home() {
             url={"production"}
             title={"PRODUCTION COMPANIES LIVE"}
           />
-          <CategoryList />
+          <CategoryList title={"SHORT FILMS"} desc={"TOP-RATED SHORT FILMS"} />
           <LanguageList />
+          <CategoryList title={"TAMIL FILMS"} desc={"POPULAR TAMIL FILMS"} />
+          <CategoryList title={"ENGLISH FILMS"} desc={"BEST ENGLISH FILMS"} />
+          <CategoryList title={"KANNADA FILMS"} desc={"FAMOUS KANNADA FILMS"} />
           <AdsCard />
         </section>
       </div>

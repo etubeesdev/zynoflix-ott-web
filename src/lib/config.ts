@@ -1,5 +1,4 @@
-export const videoRatio = " lg:h-[275px] h-[250px] w-[180px] lg:w-[219px]";
+export const videoRatio = " lg:h-[235px] h-[250px] w-[430px] lg:w-[419px]";
 
-// export const videoRatio = " h-[234px] w-[340px]";
 
 export const ZRPKEY = "rzp_live_VVxtgFlGk9YK8d";
