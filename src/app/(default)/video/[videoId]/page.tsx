@@ -245,11 +245,11 @@ export default function Page({ params }: { params: { videoId: string } }) {
       <div className="lg:p-6 p-3">
         <div className="w-full mt-4 flex lg:flex-row flex-col pb-3 justify-between items-start lg:items-center">
           <div className="lg:w-full w-full">
-            <div className="flex items-center justify-between">
+            <div className="flex items-start space-y-2 lg:space-y-0 lg:items-center lg:flex-row flex-col justify-between">
               <div className="">
                 <h3 className="lg:text-xl text-lg font-bold">{video.title}</h3>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center flex-wrap gap-2">
                 <div className="bg-main">{video.views} Views</div>
                 <hr className="border-t h-0 w-4 rotate-90" />
                 <div className="bg-main">{video.certification}</div>
@@ -270,7 +270,7 @@ export default function Page({ params }: { params: { videoId: string } }) {
                 <div className="bg-main">Block Blaster</div>
               </div>
             </div>
-            <div className="flex items-center py-6 justify-between">
+            <div className="flex items-center lg:flex-row flex-col py-6 justify-between">
               <div className="flex items-center w-full lg:justify-start justify-between gap-4">
                 <Link
                   href={`/profile/${userId}`}
@@ -304,7 +304,7 @@ export default function Page({ params }: { params: { videoId: string } }) {
                     : "Follow"}
                 </button>
               </div>
-              <div className="w-[70%]">
+              <div className="lg:w-[70%] w-full">
                 <VotePoll
                   rating={rating}
                   handleRatingChange={handleRatingChange}
@@ -329,7 +329,7 @@ export default function Page({ params }: { params: { videoId: string } }) {
             </div>
           </div>
         </div>
-        <div className="flex items-center py-6 justify-end">
+        <div className="flex items-center lg:flex-row flex-col justify-start py-6 lg:justify-end">
           <div className="lg:pt-0 pt-4 lg:pb-0 pb-4">
             <Link
               href={isMembership ? "/membership" : "/profile"}
@@ -393,7 +393,7 @@ function VotePoll({ numberOfStars, handleRatingChange, rating }: any) {
 
   return (
     <div className="w-full max-w-5xl p-4 space-y-4 rounded-lg ">
-      <div className="flex items-center gap-6 justify-between">
+      <div className="flex items-center lg:flex-row flex-col gap-6 justify-between">
         <Button
           variant="ghost"
           className=" text-white hover:bg-purple-800 hover:text-white px-6"
@@ -422,7 +422,7 @@ function VotePoll({ numberOfStars, handleRatingChange, rating }: any) {
         </div>
       </div>
 
-      <div className="flex items-center justify-between gap-2">
+      <div className="flex items-center lg:flex-row flex-col justify-between gap-2">
         <div className="flex items-center gap-3">
           <Button
             disabled

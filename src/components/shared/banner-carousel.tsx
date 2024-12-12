@@ -32,7 +32,7 @@ export function BannerCarousel() {
   if (error) return "An error has occurred: ";
 
   return (
-    <Carousel className="lg:h-[650px] h-[550px] w-full">
+    <Carousel className="lg:h-[650px]lg:mt-0 mt-16 h-[250px] w-full">
       <CarouselContent>
         {data.video.map((video: Ivideo, index: number) => (
           <CarouselItem key={index} className="">
@@ -45,7 +45,7 @@ export function BannerCarousel() {
                 muted
                 poster={video.processedImages.medium.path}
                 width="320"
-                className="w-full lg:h-[650px] h-[550px] aspect-auto object-cover"
+                className="w-full lg:h-[650px] h-[250px] aspect-auto object-cover"
                 height="240"
                 controls={false}
               >
@@ -53,11 +53,11 @@ export function BannerCarousel() {
                 Your browser does not support the video tag.
               </video>
               <div className="video-overlay"></div>
-              <div className="absolute top-[50%] lg:top-[45%] left-12 right-0">
+              <div className="absolute top-[60%] lg:top-[45%] lg:left-12 left-3 right-0">
                 <div className="">
                   <div className="lg:w-1/2 w-[80%]">
                     <div className="text-white">
-                      <h2 className="lg:text-4xl text-base title line-clamp-3 font-bold">
+                      <h2 className="lg:text-4xl lg:line-clamp-3  text-base title line-clamp-1 font-bold">
                         {video.title}
                       </h2>
 
@@ -81,7 +81,7 @@ export function BannerCarousel() {
 
                       <Link
                         href={`/video/${video._id}`}
-                        className="bg-main w-max font-bold text-white flex items-center gap-2 rounded-xl lg:px-6 px-4 py-2 lg:py-3 mt-6"
+                        className="bg-main lg:block hidden w-max font-bold text-white flex items-center gap-2 rounded-xl lg:px-6 px-4 py-2 lg:py-3 mt-6"
                       >
                         <PlaySVG />
                         PLAY

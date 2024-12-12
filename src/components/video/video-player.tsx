@@ -49,7 +49,7 @@ const VideoPlayer = ({
   return (
     <div className="pt-24">
       <MediaPlayer
-        className="lg:!h-[650px] h-[200px] aspect-video w-full"
+        className="lg:h-[850px] xl:h-[650px] md:h-[300px] sm:h-[300px] h-[250px] aspect-video w-full"
         autoPlay
         src={videoLink}
         viewType="video"
