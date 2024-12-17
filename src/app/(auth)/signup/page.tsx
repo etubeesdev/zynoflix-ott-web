@@ -6,7 +6,7 @@ const page = () => {
   return (
     <div className="">
       <div className="min-h-screen  text-gray-900 flex justify-center relative">
-        {/* <video
+        <video
           loop
           className="absolute z-20 inset-0 w-full h-full object-cover object-center bg-black opacity-70"
           autoPlay
@@ -14,10 +14,10 @@ const page = () => {
           controls={false}
           preload="none"
         >
-          <source src="/bg/bg-login.mp4" type="video/mp4" />
+          <source src="/bg/bg-login-1.mp4" type="video/mp4" />
           Your browser does not support the video tag.
-        </video> */}
-         <div className="hero-bg-gradient "></div>
+        </video>
+        {/* <div className="hero-bg-gradient "></div> */}
         <div className="max-w-screen-xl z-50 m-0 sm:m-10 rounded-3xl flex justify-center flex-1 ">
           <div className="lg:w-1/2 xl:w-5/12 p-6  rounded-3xl  sm:p-12">
             <div className="mt-12 flex flex-col items-center">

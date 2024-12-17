@@ -225,6 +225,7 @@ export default function Page({ params }: { params: { videoId: string } }) {
   if (isLoading) {
     return <div>Loading...</div>;
   }
+  console.log(ratings, "ratings");
 
   const numberOfStars = Math.max(
     0,
@@ -249,7 +250,7 @@ export default function Page({ params }: { params: { videoId: string } }) {
               <div className="">
                 <h3 className="lg:text-xl text-lg font-bold">{video.title}</h3>
               </div>
-              <div className="flex items-center flex-wrap gap-2">
+              <div className="flex lg:text-sm text-xs items-center flex-wrap gap-2">
                 <div className="bg-main">{video.views} Views</div>
                 <hr className="border-t h-0 w-4 rotate-90" />
                 <div className="bg-main">{video.certification}</div>
@@ -283,8 +284,8 @@ export default function Page({ params }: { params: { videoId: string } }) {
                     src={userprofile?.profilePic}
                     alt=""
                   />
+                  <div>{userprofile?.full_name}</div>
                   <div className="font-medium dark:text-white">
-                    {/* <div>{userprofile?.full_name}</div> */}
                     <div className="card dark:text-gray-400">
                       {follower?.[0]?.user_id.length || 0}
                     </div>
@@ -318,7 +319,9 @@ export default function Page({ params }: { params: { videoId: string } }) {
                   onClick={() => setIsOpen(!isOpen)}
                   className="px-4 w-full text-start py-6 bg-gray-900 my-5 rounded-3xl"
                 >
-                  <h2 className="uppercase text-xl font-semibold">Comment</h2>
+                  <h2 className="uppercase text-sm lg:text-xl font-semibold">
+                    Comment
+                  </h2>
                 </button>
                 {isOpen && (
                   <div className="">

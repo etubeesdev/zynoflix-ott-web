@@ -22,7 +22,7 @@ const CategoryList = ({ title, desc }: any) => {
     <div className="">
       <div className="">
         <div className="pb-8">
-          <h2 className="lg:text-3xl text-xl font-bold">{title}</h2>
+          <h2 className="lg:text-3xl text-base font-bold">{title}</h2>
           <p className="text-gray-600 text-sm">{desc}</p>
         </div>
         <VideoCarousel data={data} />

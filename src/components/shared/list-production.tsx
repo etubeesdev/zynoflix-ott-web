@@ -88,10 +88,10 @@ const ListProduction = ({ url, title }: any) => {
                         <div className=" relative w-max z-20">
                           <div className="bg-red-500 w-4 h-4 rounded-full z-50 absolute -top-1 lg:top-1 right-1 lg:right-5" />
                           <Image
-                            width={220}
-                            height={220}
+                            width={180}
+                            height={180}
                             src={company.logo}
-                            className="hover:scale-105 transition-transform lg:w-32 w-16 h-16 lg:h-32 rounded-full object-cover object-center duration-300 ease-in-out"
+                            className="hover:scale-105 transition-transform lg:w-32 w-14 h-14 lg:h-32 rounded-full object-cover object-center duration-300 ease-in-out"
                             alt={`${company.name} Logo`}
                           />
                         </div>
@@ -184,7 +184,7 @@ const ListProduction = ({ url, title }: any) => {
                             width={180}
                             height={180}
                             src={company.logo}
-                            className="hover:scale-105 transition-transform lg:w-32 w-16 h-16 lg:h-32 rounded-full object-cover object-center duration-300 ease-in-out"
+                            className="hover:scale-105 transition-transform lg:w-32 w-14 h-14 lg:h-32 rounded-full object-cover object-center duration-300 ease-in-out"
                             alt={`${company.name} Logo`}
                           />
                         </div>
