@@ -116,5 +116,5 @@ html {
     ),
     var(--btn-bgcolor3);
   transition-duration: 200ms;
-  @apply lg:text-sm bg-blue-500 rounded-xl text-white px-4 py-2 text-xs video-content-holder-dot font-medium;
+  @apply lg:text-xs bg-blue-500 rounded-xl text-white px-4 py-2 text-xs video-content-holder-dot font-medium;
 }

@@ -12,46 +12,7 @@ const About: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header className=" shadow-md sticky top-0 z-50">
-        <nav className="max-w-6xl mx-auto p-4 flex justify-between items-center">
-          <a href="/" className="text-2xl font-bold text-blue-600">
-            ZynoFlix
-          </a>
-          <ul className="flex space-x-4">
-            <li>
-              <a href="/" className="text-gray-600 hover:text-blue-600">
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="/about" className="text-gray-600 hover:text-blue-600">
-                About
-              </a>
-            </li>
-            <li>
-              <a
-                href="/legal-policy"
-                className="text-gray-600 hover:text-blue-600"
-              >
-                Legal Policy
-              </a>
-            </li>
-            <li>
-              <a
-                href="/privacy-policy"
-                className="text-gray-600 hover:text-blue-600"
-              >
-                Privacy Policy
-              </a>
-            </li>
-            <li>
-              <a href="/contact" className="text-gray-600 hover:text-blue-600">
-                Contact
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </header>
+
       <main className="flex-grow max-w-4xl mx-auto  p-8 rounded-lg shadow-lg mt-10">
         <h1 className="text-3xl font-bold mb-6">Welcome to ZynoFlix</h1>
         <p className="mb-4">

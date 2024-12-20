@@ -72,7 +72,7 @@ const ListProduction = ({ url, title }: any) => {
 
   return (
     <div className="">
-      <h1 className="lg:text-3xl text-xl font-bold mb-6">{title}</h1>
+      <h1 className="lg:text-xl text-xl font-bold mb-6">{title}</h1>
       {url === "production" ? (
         <div className="w-full">
           <Carousel className="w-full max-w-[91vw]   basis-12 lg:max-w-[94vw]">
@@ -80,18 +80,18 @@ const ListProduction = ({ url, title }: any) => {
               {productionCompanies &&
                 productionCompanies?.map((company: any) => (
                   <CarouselItem
-                    className=" bg-[#0f101e] border-[#ffffff1f] px-4 flex items-center justify-center lg:px-8 py-4 lg:py-4 border rounded basis-auto"
+                    className=" bg-[#0f101e] border-[#ffffff1f] px-4 flex items-center justify-center lg:px-4 py-2 lg:py-4 border rounded basis-auto"
                     key={company._id}
                   >
                     <Link href={"/production/" + company._id} className="">
                       <div className="flex  items-center gap-2 lg:gap-8 ">
                         <div className=" relative w-max z-20">
-                          <div className="bg-red-500 w-4 h-4 rounded-full z-50 absolute -top-1 lg:top-1 right-1 lg:right-5" />
+                          <div className="bg-red-500 w-4 h-4 rounded-full z-50 absolute -top-1 lg:top-1 right-1 lg:right-2" />
                           <Image
                             width={180}
                             height={180}
                             src={company.logo}
-                            className="hover:scale-105 transition-transform lg:w-32 w-14 h-14 lg:h-32 rounded-full object-cover object-center duration-300 ease-in-out"
+                            className="hover:scale-105 transition-transform lg:w-24 w-12 h-12 lg:h-24 rounded-full object-cover object-center duration-300 ease-in-out"
                             alt={`${company.name} Logo`}
                           />
                         </div>
@@ -141,7 +141,7 @@ const ListProduction = ({ url, title }: any) => {
                             </svg>
                             <span className="text-red-500">LIVE</span>
                           </p>
-                          <h2 className="lg:text-3xl lg:w-72 w-full text-lg pl-2 font-bold mb-2">
+                          <h2 className="lg:text-xl lg:w-max w-full text-lg pl-2 font-bold mb-2">
                             {company.name}
                           </h2>
                           <p className="text-[#92939e] lg:text-base text-xs  pl-2 mb-2">
@@ -179,20 +179,20 @@ const ListProduction = ({ url, title }: any) => {
                     <Link href={"/production/" + company._id} className="">
                       <div className="flex flex-col items-center gap-2 lg:gap-8">
                         <div className=" relative w-max z-20">
-                          <div className="bg-red-500 w-4 h-4 rounded-full z-50 absolute -top-1 lg:top-1 right-1 lg:right-5" />
+                          <div className="bg-red-500 w-4 h-4 rounded-full z-50 absolute -top-1 lg:top-1 right-1 lg:right-2" />
                           <Image
                             width={180}
                             height={180}
                             src={company.logo}
-                            className="hover:scale-105 transition-transform lg:w-32 w-14 h-14 lg:h-32 rounded-full object-cover object-center duration-300 ease-in-out"
+                            className="hover:scale-105 transition-transform lg:w-24 w-12 h-12 lg:h-24 rounded-full object-cover object-center duration-300 ease-in-out"
                             alt={`${company.name} Logo`}
                           />
                         </div>
                         <div className="text-center">
-                          <h2 className="lg:text-3xl  w-full text-lg pl-2 font-bold mb-2">
+                          <h2 className="lg:text-xl  w-full text-lg pl-2 font-bold mb-2">
                             {company.name}
                           </h2>
-                          <p className="text-blue-500 lg:text-base text-xs  pl-2">
+                          <p className="text-blue-500 lg:text-sm text-xs  pl-2">
                             DIRECTOR
                           </p>
                         </div>

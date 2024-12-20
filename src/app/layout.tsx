@@ -46,6 +46,10 @@ export default function RootLayout({
       </Head>
 
       <body>
+        <script
+          src="//code.tidio.co/10qdqbeh4bzacrayxyrxave4vbbqqj6y.js"
+          async
+        ></script>
         <Header />
         <AuthProvider>{children}</AuthProvider>
         <Toaster richColors />
