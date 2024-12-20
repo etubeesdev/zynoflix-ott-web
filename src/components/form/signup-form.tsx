@@ -105,6 +105,7 @@ const SignupForm: React.FC<Props> = ({ mode }) => {
         toast.error("Invalid password provided for login");
         return;
       }
+
       if (response.data.error === "User already exists") {
         toast.error(
           "User already exists with the provided email so please login instead"
@@ -133,7 +134,7 @@ const SignupForm: React.FC<Props> = ({ mode }) => {
       }
 
       toast.success(`${mode === "login" ? "Login" : "Signup"} form submitted`);
-      window.location.href = "/";
+      // window.location.href = "/";
     } catch (error) {
       console.error("Submission error", error);
       toast.error("Failed to submit form please try again");
@@ -150,7 +151,7 @@ const SignupForm: React.FC<Props> = ({ mode }) => {
             <input
               className={`w-full px-8 py-4 rounded-lg font-medium  border-2 bg-transparent ${
                 errors.full_name ? "border-red-500" : "border-gray-200"
-              } placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white`}
+              } placeholder-gray-500 text-sm focus:outline-none  `}
               type="text"
               name="full_name"
               value={formData.full_name}
