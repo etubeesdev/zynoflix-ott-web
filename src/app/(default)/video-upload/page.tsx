@@ -19,7 +19,7 @@ const Page = () => {
     (item: any) => item.membershipType === "upload-video"
   );
 
-  const [isSuccessful, setIsSuccessful] = React.useState<boolean>(false);
+  const [isSuccessful, setIsSuccessful] = React.useState<boolean>(true);
   const router = useRouter();
   useEffect(() => {
     if (isLogin) {
@@ -30,20 +30,31 @@ const Page = () => {
       return;
     }
     if (isCompleted?.[0]?.isVideo_uploaded) {
-      setIsSuccessful(true);
+      setIsSuccessful(isCompleted?.[0]?.isVideo_uploaded);
     }
   }, [isCompleted]);
 
   const options = {
     key: ZRPKEY,
     membershipType: "upload-video",
-    amount: "49900", //  = INR 199
+    amount: "149900", //  = INR 199
     name: "Zynoflix OTT Platform",
     description: "Month Membership",
     image: "./logo/logo-1.png",
     order_id: "order_7HtFNLS98dSj8x",
     handler: async function (response: any) {
       const isSuccessful = response.razorpay_payment_id;
+      const response2 = await axios.post("/payment", options);
+      if (response2.data.order.membershipType !== "upload-video") {
+        toast.error("Payment failed");
+        return;
+      }
+
+      console.log(response2.data.order);
+
+      options.order_id = response2.data.order.transactionId;
+      setTransactionId(response2.data.order.transactionId);
+      localStorage.setItem("transactionId", response2.data.order._id);
       const transaction = localStorage.getItem("transactionId");
       if (!isSuccessful) {
         const response1 = await axios.put(`/payment/${transaction}`, {
@@ -80,13 +91,13 @@ const Page = () => {
   };
 
   const openPayModal = async () => {
-    const response = await axios.post("/payment", options);
+    // const response = await axios.post("/payment", options);
 
-    console.log(response.data.order);
+    // console.log(response.data.order);
 
-    options.order_id = response.data.order.transactionId;
-    setTransactionId(response.data.order.transactionId);
-    localStorage.setItem("transactionId", response.data.order._id);
+    // options.order_id = response.data.order.transactionId;
+    // setTransactionId(response.data.order.transactionId);
+    // localStorage.setItem("transactionId", response.data.order._id);
 
     var rzp1 = new (window as any).Razorpay(options) as any;
     await rzp1.open();
