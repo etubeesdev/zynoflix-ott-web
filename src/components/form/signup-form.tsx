@@ -134,7 +134,7 @@ const SignupForm: React.FC<Props> = ({ mode }) => {
       }
 
       toast.success(`${mode === "login" ? "Login" : "Signup"} form submitted`);
-      // window.location.href = "/";
+      window.location.href = "/";
     } catch (error) {
       console.error("Submission error", error);
       toast.error("Failed to submit form please try again");

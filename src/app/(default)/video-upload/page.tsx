@@ -15,10 +15,7 @@ const Page = () => {
     return response.data;
   });
 
-  const isCompleted = data?.order.filter(
-    (item: any) => item.membershipType === "upload-video"
-  );
-
+  const isCompleted = data?.order.membershipType === "upload-video";
   const [isSuccessful, setIsSuccessful] = React.useState<boolean>(true);
   const router = useRouter();
   useEffect(() => {
@@ -29,12 +26,13 @@ const Page = () => {
       router.push("/login");
       return;
     }
-    if (isCompleted?.[0]?.isVideo_uploaded) {
-      setIsSuccessful(isCompleted?.[0]?.isVideo_uploaded);
+    if (isCompleted) {
+      // setIsSuccessful(!data?.order.isVideo_uploaded);
     }
   }, [isCompleted]);
+  console.log(isSuccessful, "isCompleted");
 
-  const options = {
+  const options: any = {
     key: ZRPKEY,
     membershipType: "upload-video",
     amount: "149900", //  = INR 199
@@ -44,17 +42,7 @@ const Page = () => {
     order_id: "order_7HtFNLS98dSj8x",
     handler: async function (response: any) {
       const isSuccessful = response.razorpay_payment_id;
-      const response2 = await axios.post("/payment", options);
-      if (response2.data.order.membershipType !== "upload-video") {
-        toast.error("Payment failed");
-        return;
-      }
 
-      console.log(response2.data.order);
-
-      options.order_id = response2.data.order.transactionId;
-      setTransactionId(response2.data.order.transactionId);
-      localStorage.setItem("transactionId", response2.data.order._id);
       const transaction = localStorage.getItem("transactionId");
       if (!isSuccessful) {
         const response1 = await axios.put(`/payment/${transaction}`, {
@@ -69,8 +57,8 @@ const Page = () => {
         status: "success",
       });
 
+      setIsSuccessful(false);
       if (response1.data.status === "success") {
-        setIsSuccessful(true);
         toast.success("Payment successful");
       }
 
@@ -91,13 +79,13 @@ const Page = () => {
   };
 
   const openPayModal = async () => {
-    // const response = await axios.post("/payment", options);
+    const response = await axios.post("/payment", options);
 
-    // console.log(response.data.order);
+    console.log(response.data.order);
 
-    // options.order_id = response.data.order.transactionId;
-    // setTransactionId(response.data.order.transactionId);
-    // localStorage.setItem("transactionId", response.data.order._id);
+    options.order_id = response.data.order.transactionId;
+    setTransactionId(response.data.order.transactionId);
+    localStorage.setItem("transactionId", response.data.order._id);
 
     var rzp1 = new (window as any).Razorpay(options) as any;
     await rzp1.open();
