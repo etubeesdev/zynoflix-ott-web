@@ -15,14 +15,14 @@ const ProductionProfile = dynamic(
   () => import("@/components/profile/production-profile")
 );
 
-const Page = () => {
+export default async function Page({ params }: { params: any }) {
   const {
     data: user,
     isLoading,
     error,
     refetch,
   } = useQuery("user", async () => {
-    const response = await axios.get(`/auth/user/${userId}`);
+    const response = await axios.get(`/auth/user/${params.slug}`);
     return response.data.user;
   });
   const {
@@ -38,7 +38,7 @@ const Page = () => {
     data: follower,
     isLoading: followerLoading,
     refetch: refetchFollower,
-  } = useQuery(["follower", userId], async () => {
+  } = useQuery(["follower", params.slug], async () => {
     const response = await axios.get(`/followers`);
     return response.data;
   });
@@ -88,7 +88,7 @@ const Page = () => {
               </p>
             </div>
             <div className="py-8 px-12">
-              <button className="flex items-center bg-green-500 rounded-xl px-6 py-3 gap-3">
+              {/* <button className="flex items-center bg-green-500 rounded-xl px-6 py-3 gap-3">
                 <VideoIcon className="w-6 h-6" />
                 my Video
               </button>
@@ -97,20 +97,18 @@ const Page = () => {
                 <div className="flex items-center justify-center text-white text-2xl font-bold mt-8">
                   No Videos Uploaded
                 </div>
-              )}
+              )} */}
 
-              <div className="grid pt-8 gap-6 grid-cols-5">
+              {/* <div className="grid pt-8 gap-6 grid-cols-5">
                 {userVideos?.length > 0 &&
                   userVideos?.map((video: any, index: number) => (
                     <VideoCard key={index} index={index} video={video} />
                   ))}
-              </div>
+              </div> */}
             </div>
           </div>
         </section>
       )}
     </main>
   );
-};
-
-export default Page;
+}

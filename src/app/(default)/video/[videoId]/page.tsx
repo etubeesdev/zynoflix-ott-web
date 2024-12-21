@@ -218,6 +218,10 @@ export default function Page({ params }: { params: { videoId: string } }) {
 
   // Handle rating change
   const handleRatingChange = (newRating: number) => {
+    if (!userId) {
+      toast.error("Login before Voting ");
+      router.push("/login");
+    }
     setRating(newRating); // Update local state
     mutate(newRating); // Post the new rating
   };
@@ -250,7 +254,7 @@ export default function Page({ params }: { params: { videoId: string } }) {
               <div className="">
                 <h3 className="lg:text-xl text-lg font-bold">{video.title}</h3>
               </div>
-              <div className="flex lg:text-sm text-xs items-center flex-wrap gap-2">
+              <div className="flex lg:text-sm text-[10px] items-center flex-wrap gap-2">
                 <div className="bg-main">{video.views} Views</div>
                 <hr className="border-t h-0 w-4 rotate-90" />
                 <div className="bg-main">{video.certification}</div>
@@ -274,7 +278,7 @@ export default function Page({ params }: { params: { videoId: string } }) {
             <div className="flex items-center lg:flex-row flex-col py-6 justify-between">
               <div className="flex items-center w-full lg:justify-start justify-between gap-4">
                 <Link
-                  href={`/profile/${userId}`}
+                  href={`/profile/${video?.user}`}
                   className="flex items-center gap-3"
                 >
                   <Image

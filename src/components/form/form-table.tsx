@@ -607,12 +607,6 @@ const CreateFormSubmit = ({ status, openPayModal, isSuccessful }: any) => {
 
               {isSuccessful && (
                 <div className="">
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Corrupti laborum assumenda maxime adipisci, cum commodi
-                    illum dicta obcaecati ea, facilis mollitia, perspiciatis ab
-                    repellat ad pariatur doloremque maiores saepe veniam.
-                  </p>
                   {/* price 499 per video upload */}
                   <p className="text-lg font-semibold">
                     Price: 499 per video upload

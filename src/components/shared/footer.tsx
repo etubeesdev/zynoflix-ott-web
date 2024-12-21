@@ -141,7 +141,7 @@ const Footer: React.FC = () => {
                 OUR SERVICE
               </h2>
               <ul className=" text-gray-400 font-medium">
-                <li className="">
+                {/* <li className="">
                   <a className="hover:underline" href="/upload-video">
                     Sell Videos
                   </a>
@@ -153,15 +153,15 @@ const Footer: React.FC = () => {
                   >
                     Wanted Videos
                   </a>
-                </li>
-                <li>
+                </li> */}
+                {/* <li>
                   <a
                     className="hover:underline"
                     href="https://zynoflix.com/ticket/booking"
                   >
                     Live Streaming
                   </a>
-                </li>
+                </li> */}
                 <li>
                   <a
                     className="hover:underline"
