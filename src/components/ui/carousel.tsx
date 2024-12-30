@@ -85,16 +85,16 @@ const Carousel = React.forwardRef<
       api?.scrollNext();
     }, [api]);
 
-    // Auto Matic scroll
-    React.useEffect(() => {
-      const interval = setInterval(() => {
-        if (api) {
-          api.scrollNext();
-        }
-      }, 3000);
+    // // Auto Matic scroll
+    // React.useEffect(() => {
+    //   const interval = setInterval(() => {
+    //     if (api) {
+    //       api.scrollNext();
+    //     }
+    //   }, 3000);
 
-      return () => clearInterval(interval);
-    }, [api]);
+    //   return () => clearInterval(interval);
+    // }, [api]);
 
     const handleKeyDown = React.useCallback(
       (event: React.KeyboardEvent<HTMLDivElement>) => {
