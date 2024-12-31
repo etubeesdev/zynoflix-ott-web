@@ -58,7 +58,7 @@ const Carousel = React.forwardRef<
     },
     ref
   ) => {
-    const [carouselRef, api] = useEmblaCarousel(
+    const [carouselRef, api]: any = useEmblaCarousel(
       {
         ...opts,
         axis: orientation === "horizontal" ? "x" : "y",
@@ -67,6 +67,47 @@ const Carousel = React.forwardRef<
     );
     const [canScrollPrev, setCanScrollPrev] = React.useState(false);
     const [canScrollNext, setCanScrollNext] = React.useState(false);
+
+    const getRandomScrollTime = React.useCallback(() => {
+      return Math.floor(Math.random() * (7000 - 3000 + 1) + 3000);
+    }, []);
+
+    React.useEffect(() => {
+      if (!api) return;
+
+      let interval: NodeJS.Timeout;
+
+      const startAutoScroll = () => {
+        interval = setInterval(() => {
+          if (api.canScrollNext()) {
+            api.scrollNext();
+          } else {
+            api.scrollTo(0);
+          }
+          clearInterval(interval);
+          startAutoScroll();
+        }, getRandomScrollTime());
+      };
+
+      startAutoScroll();
+
+      const onPointerDown = () => clearInterval(interval);
+      const onPointerUp = () => startAutoScroll();
+
+      const rootNode = carouselRef.current;
+      if (rootNode) {
+        rootNode.addEventListener("pointerdown", onPointerDown);
+        rootNode.addEventListener("pointerup", onPointerUp);
+      }
+
+      return () => {
+        clearInterval(interval);
+        if (rootNode) {
+          rootNode.removeEventListener("pointerdown", onPointerDown);
+          rootNode.removeEventListener("pointerup", onPointerUp);
+        }
+      };
+    }, [api, carouselRef, getRandomScrollTime]);
 
     const onSelect = React.useCallback((api: CarouselApi) => {
       if (!api) {
@@ -84,17 +125,6 @@ const Carousel = React.forwardRef<
     const scrollNext = React.useCallback(() => {
       api?.scrollNext();
     }, [api]);
-
-    // // Auto Matic scroll
-    // React.useEffect(() => {
-    //   const interval = setInterval(() => {
-    //     if (api) {
-    //       api.scrollNext();
-    //     }
-    //   }, 3000);
-
-    //   return () => clearInterval(interval);
-    // }, [api]);
 
     const handleKeyDown = React.useCallback(
       (event: React.KeyboardEvent<HTMLDivElement>) => {
